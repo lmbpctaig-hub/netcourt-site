@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NetCourt — Ranking de Tênis e Beach Tênis para Clubes</title>
+  <meta name="description" content="Chega de planilha e WhatsApp bagunçado. O NetCourt organiza o ranking do seu clube de tênis ou beach tênis automaticamente. Sem App Store. Grátis para começar." />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="NetCourt — Ranking de Tênis e Beach Tênis" />
+  <meta property="og:description" content="Ranking automatizado para clubes. Sem App Store, sorteio automático, WhatsApp integrado. Grátis para começar." />
+  <meta property="og:url"         content="https://netcourt.com.br" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="https://netcourt.com.br/og-image.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="NetCourt — Ranking de Tênis e Beach Tênis" />
+  <meta name="twitter:description" content="Ranking automatizado para clubes. Sem App Store, sorteio automático, WhatsApp integrado." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════
+       TOKENS
+    ═══════════════════════════════ */
+    :root {
+      --bg:      #080E1A;
+      --bg2:     #0D1628;
+      --blue:    #378ADD;
+      --blue2:   #5BA3F5;
+      --green:   #1D9E75;
+      --green2:  #2DC994;
+      --text:    #E8EDF5;
+      --muted:   #6B7FA8;
+      --border:  rgba(55,138,221,0.15);
+      --r:       12px;
+      --max:     1100px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════
+       TYPOGRAPHY
+    ═══════════════════════════════ */
+    h1, h2, h3 {
+      font-family: 'DM Serif Display', serif;
+      letter-spacing: -0.022em;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 11.5px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--blue2); margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.8vw, 40px);
+      line-height: 1.22; color: var(--text); margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 16.5px; color: var(--muted); line-height: 1.68; max-width: 540px;
+    }
+
+    /* ═══════════════════════════════
+       LAYOUT
+    ═══════════════════════════════ */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 80px 0; }
+
+    /* ═══════════════════════════════
+       BUTTONS
+    ═══════════════════════════════ */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      color: #fff; font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 15.5px;
+      padding: 13px 30px; border-radius: 10px;
+      text-decoration: none; letter-spacing: .01em;
+      box-shadow: 0 4px 24px rgba(55,138,221,.35);
+      transition: transform .15s, box-shadow .15s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(55,138,221,.50); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--blue2);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600; font-size: 15px;
+      padding: 13px 26px; border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid rgba(55,138,221,.30);
+      transition: border-color .15s, background .15s;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { border-color: rgba(55,138,221,.6); background: rgba(55,138,221,.07); }
+
+    /* ═══════════════════════════════
+       NAV
+    ═══════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,14,26,.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      transition: background .2s;
+    }
+    .nav-inner {
+      max-width: var(--max); margin: 0 auto; padding: 0 24px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .nav-logo-text { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--muted); font-size: 14px; text-decoration: none; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .nav-login { color: var(--muted); font-size: 14px; font-weight: 500; text-decoration: none; transition: color .15s; }
+    .nav-login:hover { color: var(--text); }
+
+    /* hamburger */
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 6px; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--muted); border-radius: 2px; transition: all .2s; }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(8,14,26,.98); border-bottom: 1px solid var(--border);
+      padding: 20px 24px 24px; flex-direction: column; gap: 16px; z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--muted); font-size: 16px; text-decoration: none; font-weight: 500; }
+    .mobile-menu .btn-primary { justify-content: center; font-size: 15px; }
+
+    /* ═══════════════════════════════
+       HERO
+    ═══════════════════════════════ */
+    #hero {
+      position: relative;
+      padding: 132px 24px 88px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-glow-1 {
+      position: absolute; top: -160px; left: 50%; transform: translateX(-50%);
+      width: 820px; height: 820px;
+      background: radial-gradient(circle, rgba(55,138,221,.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; bottom: -40px; right: 6%;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(29,158,117,.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(55,138,221,.10); border: 1px solid rgba(55,138,221,.26);
+      border-radius: 999px; padding: 6px 18px; margin-bottom: 28px;
+      font-size: 13px; font-weight: 600; color: var(--blue2); letter-spacing: .02em;
+    }
+
+    .hero-h1 {
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.16; color: var(--text); margin: 0 0 6px; letter-spacing: -.025em;
+    }
+    .grad-text {
+      background: linear-gradient(95deg, var(--blue) 5%, var(--blue2) 55%, #90D4FA 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(15.5px, 2vw, 18.5px); color: var(--muted);
+      line-height: 1.72; margin: 22px auto 34px; max-width: 600px;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
+
+    .trust-row {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 8px 14px; margin-bottom: 36px;
+    }
+    .trust-chip {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13.5px; color: var(--text);
+      background: rgba(255,255,255,.033); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 14px;
+    }
+    .tc-check { color: var(--green2); }
+
+    .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 52px; }
+
+    /* proof bar */
+    .proof-bar {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+      gap: 6px 28px; padding-top: 28px; border-top: 1px solid var(--border);
+    }
+    .proof-vline { width: 1px; height: 30px; background: var(--border); }
+    .proof-stat  { text-align: center; }
+    .proof-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px; color: var(--text); display: block;
+    }
+    .proof-lbl { font-size: 12px; color: var(--muted); display: block; margin-top: 1px; }
+
+    /* ═══════════════════════════════
+       TICKER
+    ═══════════════════════════════ */
+    .ticker-wrap {
+      overflow: hidden;
+      background: var(--bg2);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 11px 0; cursor: default;
+    }
+    .ticker-track {
+      display: flex; gap: 48px; width: max-content;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); white-space: nowrap; }
+    .ticker-item .ti-dot { color: var(--green2); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ═══════════════════════════════
+       PHONE PREVIEW
+    ═══════════════════════════════ */
+    #preview { padding: 80px 0 72px; }
+    .preview-header { text-align: center; margin-bottom: 44px; }
+    .phones-row {
+      display: flex; justify-content: center; align-items: flex-end;
+      gap: 28px; flex-wrap: wrap;
+    }
+    .phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .phone-label { font-size: 11.5px; color: var(--muted); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+    .phone {
+      width: 200px;
+      background: var(--bg2); border-radius: 32px;
+      border: 2px solid rgba(255,255,255,.09);
+      box-shadow: 0 28px 72px rgba(0,0,0,.55), 0 0 0 1px rgba(55,138,221,.08);
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .phone-a { height: 400px; }
+    .phone-b { height: 430px; margin-top: -20px; }
+    .pnotch {
+      width: 56px; height: 5px; background: rgba(255,255,255,.07);
+      border-radius: 3px; margin: 10px auto 0; flex-shrink: 0;
+    }
+    .pheader {
+      padding: 10px 13px 5px;
+      font-size: 11.5px; font-weight: 700; color: var(--text); flex-shrink: 0;
+    }
+    .pheader .psub { font-size: 9px; color: var(--muted); font-weight: 500; margin-bottom: 2px; }
+    .pcontent { flex: 1; padding: 0 11px 11px; overflow: hidden; }
+
+    /* phone atoms */
+    .pos-band {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(55,138,221,.14); border-radius: 7px; padding: 5px 10px; margin-bottom: 8px;
+    }
+    .pos-band .pbn { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--blue2); }
+    .pos-band .pbl { font-size: 10px; color: var(--muted); }
+    .pos-band .pbu { font-size: 10px; color: var(--green2); }
+
+    .stats-row { display: flex; gap: 5px; margin-bottom: 8px; }
+    .sc {
+      flex: 1; background: rgba(255,255,255,.04); border: 1px solid var(--border);
+      border-radius: 6px; padding: 5px 5px; text-align: center;
+    }
+    .sc-v { font-size: 12px; font-weight: 700; color: var(--text); }
+    .sc-l { font-size: 9px; color: var(--muted); }
+
+    .mtitle { font-size: 9.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin: 7px 0 4px; }
+    .gcard {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,.04); border-radius: 6px;
+      padding: 5px 7px; margin-bottom: 4px; font-size: 11px;
+    }
+    .gcard .gn { color: var(--text); font-weight: 600; }
+    .gcard .gd { color: var(--muted); font-size: 10px; }
+    .gcard .gw {
+      background: rgba(55,138,221,.2); color: var(--blue2);
+      font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+    }
+
+    .ach-card {
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(29,158,117,.11); border: 1px solid rgba(29,158,117,.24);
+      border-radius: 6px; padding: 6px 8px; margin-top: 7px;
+    }
+    .ach-card .ai { font-size: 16px; }
+    .ach-card .an { font-size: 10px; font-weight: 700; color: var(--green2); }
+    .ach-card .as { font-size: 9px; color: var(--muted); }
+
+    /* ranking phone */
+    .rk-item {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .rk-pos   { font-size: 10.5px; font-weight: 700; color: var(--muted); width: 13px; text-align: center; }
+    .rk-av    { width: 23px; height: 23px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .rk-name  { font-size: 10.5px; color: var(--text); font-weight: 600; flex: 1; }
+    .rk-pts   { font-size: 10.5px; color: var(--muted); }
+    .rk-trend { font-size: 10px; }
+    .rk-green { background: rgba(29,158,117,.09); border-radius: 6px; padding: 4px 5px; border-bottom: none !important; margin-bottom: 2px; }
+    .rk-red   { background: rgba(224,82,82,.07);  border-radius: 6px; padding: 4px 5px; border-bottom: none !important; margin-top: 2px; }
+
+    /* ═══════════════════════════════
+       COMO FUNCIONA
+    ═══════════════════════════════ */
+    #como-funciona {
+      background: var(--bg2);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .steps-hdr { text-align: center; max-width: 520px; margin: 0 auto 48px; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .step-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 28px 26px 22px;
+      position: relative; overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .step-card:hover { border-color: rgba(55,138,221,.40); transform: translateY(-3px); }
+    .step-num {
+      font-family: 'DM Serif Display', serif; font-size: 52px;
+      color: rgba(55,138,221,.10); position: absolute; top: 12px; right: 18px; line-height: 1;
+    }
+    .step-icon  { font-size: 28px; margin-bottom: 14px; }
+    .step-title { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 8px; }
+    .step-desc  { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .step-meta  { margin-top: 14px; font-size: 12px; color: var(--blue2); font-weight: 600; }
+
+    /* connector arrows between steps */
+    .step-arrow {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--border); padding-top: 40px;
+    }
+
+    /* ═══════════════════════════════
+       FUNCIONALIDADES
+    ═══════════════════════════════ */
+    .feat-tabs { display: flex; gap: 8px; margin-top: 24px; }
+    .feat-tab {
+      padding: 9px 22px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; border: 1px solid var(--border); background: transparent;
+      color: var(--muted); font-family: 'DM Sans', sans-serif; transition: all .2s;
+    }
+    .feat-tab.active {
+      background: rgba(55,138,221,.14); border-color: rgba(55,138,221,.40); color: var(--blue2);
+    }
+    .feat-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+      gap: 16px; margin-top: 30px;
+    }
+    .feat-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 22px 22px 18px;
+      transition: border-color .2s, transform .2s;
+    }
+    .feat-card:hover { border-color: rgba(55,138,221,.36); transform: translateY(-2px); }
+    .feat-icon  { font-size: 26px; margin-bottom: 12px; }
+    .feat-title { font-size: 15.5px; font-weight: 700; margin-bottom: 6px; }
+    .feat-desc  { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+    .feat-hook  { margin-top: 11px; font-size: 12px; font-weight: 600; color: var(--green2); display: flex; align-items: center; gap: 5px; }
+
+    /* ═══════════════════════════════
+       DIFERENCIAIS
+    ═══════════════════════════════ */
+    #diferenciais {
+      background: var(--bg2);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .dif-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px; margin-top: 40px;
+    }
+    .dif-card {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px 20px;
+      transition: border-color .2s;
+    }
+    .dif-card:hover { border-color: rgba(55,138,221,.36); }
+    .dif-ico {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(55,138,221,.10);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .dif-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .dif-desc  { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ═══════════════════════════════
+       PLANOS
+    ═══════════════════════════════ */
+    #planos { text-align: center; }
+    .plans-hdr { max-width: 520px; margin: 0 auto 48px; }
+    .plans-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px; text-align: left; align-items: start;
+    }
+    .plan-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 28px 28px 24px;
+      position: relative; transition: transform .2s;
+      display: flex; flex-direction: column;
+    }
+    .plan-card:hover { transform: translateY(-3px); }
+    .plan-card.featured {
+      border-color: var(--blue); border-width: 1.5px;
+      background: linear-gradient(160deg, #0D1628 60%, rgba(55,138,221,.07));
+      transform: scale(1.025);
+    }
+    .plan-card.featured:hover { transform: scale(1.025) translateY(-3px); }
+    .plan-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(90deg, var(--blue), var(--blue2));
+      color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+      padding: 3px 16px; border-radius: 999px; text-transform: uppercase; white-space: nowrap;
+    }
+    .plan-name   { font-size: 12.5px; font-weight: 700; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 12px; }
+    .plan-amount { font-family: 'DM Serif Display', serif; font-size: 40px; color: var(--text); }
+    .plan-period { font-size: 14px; color: var(--muted); margin-left: 3px; }
+    .plan-note   { font-size: 12.5px; color: var(--muted); margin: 6px 0 20px; line-height: 1.5; min-height: 36px; }
+    .plan-limit  { font-size: 13px; color: var(--blue2); font-weight: 600; margin-bottom: 18px; }
+    .plan-feats  { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 22px; flex: 1; }
+    .plan-feats li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; }
+    .plan-feats li .fi { color: var(--green2); flex-shrink: 0; margin-top: 1px; }
+    .plan-sub    { font-size: 12px; color: var(--muted); text-align: center; margin-top: 10px; line-height: 1.5; }
+
+    /* ═══════════════════════════════
+       CTA FINAL
+    ═══════════════════════════════ */
+    #cta-final {
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding: 100px 24px;
+      position: relative; overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse, rgba(55,138,221,.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+    .cta-h2    { font-size: clamp(28px, 4vw, 44px); line-height: 1.2; margin-bottom: 16px; }
+    .cta-sub   { font-size: 17px; color: var(--muted); margin-bottom: 36px; line-height: 1.65; }
+    .cta-small { color: var(--muted); font-size: 13px; margin-top: 18px; }
+
+    /* ═══════════════════════════════
+       FOOTER
+    ═══════════════════════════════ */
+    footer { border-top: 1px solid var(--border); padding: 36px 0; }
+    .footer-inner {
+      max-width: var(--max); margin: 0 auto; padding: 0 24px;
+      display: flex; flex-wrap: wrap; justify-content: space-between;
+      align-items: center; gap: 16px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .footer-logo-text { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .footer-links a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color .15s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+
+    /* ═══════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════ */
+    @media (max-width: 860px) {
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links, .nav-login { display: none; }
+      .nav-burger { display: flex; }
+      #hero { padding: 104px 20px 64px; }
+      .section { padding: 60px 0; }
+      .proof-vline { display: none; }
+      .plan-card.featured { transform: none; }
+      .plan-card.featured:hover { transform: translateY(-3px); }
+      .phones-row { gap: 16px; }
+      .phone { width: 170px; }
+      .phone-a { height: 340px; }
+      .phone-b { height: 370px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="NetCourt Home">
+      <svg width="26" height="26" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+        <polygon points="14,9 21,9 18,35 10,35" fill="white"/>
+        <polygon points="23,9 30,9 34,35 26,35" fill="#38bfff"/>
+        <line x1="9" y1="26" x2="35" y2="26" stroke="#38bfff" stroke-width="2"/>
+      </svg>
+      <span class="nav-logo-text">NetCourt</span>
+    </a>
+    <div class="nav-links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#planos">Planos</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://app.netcourt.com.br" class="nav-login">Entrar</a>
+      <a href="https://app.netcourt.com.br" class="btn-primary" style="font-size:14px;padding:9px 20px;">
+        Criar clube grátis
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 7h10M7.5 3.5l4 3.5-4 3.5" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#como-funciona" onclick="closeMenu()">Como funciona</a>
+  <a href="#funcionalidades" onclick="closeMenu()">Funcionalidades</a>
+  <a href="#planos" onclick="closeMenu()">Planos</a>
+  <a href="https://app.netcourt.com.br" class="nav-login">Entrar no app</a>
+  <a href="https://app.netcourt.com.br" class="btn-primary" style="justify-content:center;">Criar clube grátis →</a>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <span>🎾</span>
+      <span>Para clubes de Tênis &amp; Beach Tênis</span>
+    </div>
+
+    <h1 class="hero-h1">
+      Chega de app que ninguém instala,<br>
+      <span class="grad-text">planilha e WhatsApp bagunçado.</span>
+    </h1>
+
+    <p class="hero-sub">
+      O NetCourt organiza o ranking do seu clube automaticamente —
+      funciona pelo celular <strong>sem precisar de App Store</strong>,
+      sorteia os confrontos, registra os placares e mantém seus atletas
+      <strong>motivados e voltando toda semana.</strong>
+    </p>
+
+    <div class="trust-row">
+      <div class="trust-chip"><span class="tc-check">✅</span> Sem App Store — um link e o atleta já está dentro</div>
+      <div class="trust-chip"><span class="tc-check">✅</span> WhatsApp integrado — combine jogos em 1 clique</div>
+      <div class="trust-chip"><span class="tc-check">✅</span> Ranking público — seus atletas divulgam o clube</div>
+    </div>
+
+    <div class="cta-row">
+      <a href="https://app.netcourt.com.br" class="btn-primary">
+        Criar meu clube grátis
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <!-- TROCAR o href abaixo pelo link de um clube público de demonstração -->
+      <a href="https://app.netcourt.com.br" class="btn-secondary">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+          <circle cx="7.5" cy="7.5" r="6.5" stroke="#5BA3F5" stroke-width="1.4"/>
+          <path d="M6 5l4.5 2.5L6 10V5z" fill="#5BA3F5"/>
+        </svg>
+        Ver ranking de exemplo
+      </a>
+    </div>
+
+    <!-- SOCIAL PROOF BAR
+         ⚠️ Substituir os valores abaixo pelos números reais do banco antes de publicar.
+         Os IDs pn-clubs, pn-athletes e pn-games são animados pelo JS no final do arquivo. -->
+    <div class="proof-bar">
+      <div class="proof-stat">
+        <span class="proof-num" id="pn-clubs">—</span>
+        <span class="proof-lbl">clubes ativos</span>
+      </div>
+      <div class="proof-vline"></div>
+      <div class="proof-stat">
+        <span class="proof-num" id="pn-athletes">—</span>
+        <span class="proof-lbl">atletas cadastrados</span>
+      </div>
+      <div class="proof-vline"></div>
+      <div class="proof-stat">
+        <span class="proof-num" id="pn-games">—</span>
+        <span class="proof-lbl">jogos realizados</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TICKER — atividade recente
+     ⚠️ Substituir textos por dados reais quando disponível
+═══════════════════════════════════════════ -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ti-dot">🎾</span> Tennis Club SP sorteou 18 confrontos</div>
+    <div class="ticker-item"><span class="ti-dot">⬆️</span> Rodrigo S. subiu 3 posições esta semana</div>
+    <div class="ticker-item"><span class="ti-dot">🏖️</span> Academia Beira Mar finalizou ranking de Maio</div>
+    <div class="ticker-item"><span class="ti-dot">🏆</span> Ana M. desbloqueou conquista "Top 3"</div>
+    <div class="ticker-item"><span class="ti-dot">🎾</span> Clube Atlético BH registrou 24 jogos</div>
+    <div class="ticker-item"><span class="ti-dot">⬆️</span> Lucas F. venceu 5 consecutivos</div>
+    <div class="ticker-item"><span class="ti-dot">🏖️</span> Beach Arena RJ adicionou 12 novos atletas</div>
+    <div class="ticker-item"><span class="ti-dot">✅</span> Placar confirmado — 6x4 6x3 · Classe 1A</div>
+    <!-- duplicar para loop contínuo -->
+    <div class="ticker-item"><span class="ti-dot">🎾</span> Tennis Club SP sorteou 18 confrontos</div>
+    <div class="ticker-item"><span class="ti-dot">⬆️</span> Rodrigo S. subiu 3 posições esta semana</div>
+    <div class="ticker-item"><span class="ti-dot">🏖️</span> Academia Beira Mar finalizou ranking de Maio</div>
+    <div class="ticker-item"><span class="ti-dot">🏆</span> Ana M. desbloqueou conquista "Top 3"</div>
+    <div class="ticker-item"><span class="ti-dot">🎾</span> Clube Atlético BH registrou 24 jogos</div>
+    <div class="ticker-item"><span class="ti-dot">⬆️</span> Lucas F. venceu 5 consecutivos</div>
+    <div class="ticker-item"><span class="ti-dot">🏖️</span> Beach Arena RJ adicionou 12 novos atletas</div>
+    <div class="ticker-item"><span class="ti-dot">✅</span> Placar confirmado — 6x4 6x3 · Classe 1A</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PHONE PREVIEW
+═══════════════════════════════════════════ -->
+<section id="preview" class="section">
+  <div class="container">
+    <div class="preview-header">
+      <span class="section-label">O app</span>
+      <h2 class="section-title">Tudo na palma da mão.<br>Sem baixar nada.</h2>
+      <p class="section-sub" style="margin:0 auto;">PWA instalável pelo link — parece app nativo, funciona sem App Store. Um clique e seu atleta já está dentro.</p>
+    </div>
+    <div class="phones-row">
+
+      <!-- Phone: Área do atleta -->
+      <div class="phone-wrap">
+        <div class="phone phone-a">
+          <div class="pnotch"></div>
+          <div class="pheader">
+            <div class="psub">BOM DIA, CARLOS 👋</div>
+            NetCourt
+          </div>
+          <div class="pcontent">
+            <div class="pos-band">
+              <span class="pbn">#3</span>
+              <div style="display:flex;flex-direction:column;margin-left:3px;">
+                <span class="pbl">Classe 1A</span>
+                <span class="pbu">↑ +2 esta semana</span>
+              </div>
+            </div>
+            <div class="stats-row">
+              <div class="sc"><div class="sc-v" style="color:var(--green2);">68%</div><div class="sc-l">aproveit.</div></div>
+              <div class="sc"><div class="sc-v">8-4</div><div class="sc-l">V–D</div></div>
+              <div class="sc"><div class="sc-v">🔥4</div><div class="sc-l">ofensiva</div></div>
+            </div>
+            <div class="mtitle">Jogos pendentes</div>
+            <div class="gcard">
+              <div><div class="gn">vs João P.</div><div class="gd">até 15/jun</div></div>
+              <div class="gw">WhatsApp</div>
+            </div>
+            <div class="gcard">
+              <div><div class="gn">vs Rafael M.</div><div class="gd">até 22/jun</div></div>
+              <div class="gw">WhatsApp</div>
+            </div>
+            <div class="ach-card">
+              <span class="ai">🏅</span>
+              <div><div class="an">Top 3 desbloqueado!</div><div class="as">Conquista — hoje</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">Área do atleta</div>
+      </div>
+
+      <!-- Phone: Classificação -->
+      <div class="phone-wrap">
+        <div class="phone phone-b">
+          <div class="pnotch"></div>
+          <div class="pheader">Classificação · Classe 1A</div>
+          <div class="pcontent">
+            <div class="rk-item rk-green">
+              <div class="rk-pos" style="color:var(--green2);">1</div>
+              <div class="rk-av" style="background:#1D9E75;">RM</div>
+              <div class="rk-name">Rafael M.</div>
+              <div class="rk-pts">1.240</div>
+              <div class="rk-trend">🟢</div>
+            </div>
+            <div class="rk-item rk-green">
+              <div class="rk-pos" style="color:var(--green2);">2</div>
+              <div class="rk-av" style="background:#1D7E5E;">JP</div>
+              <div class="rk-name">João P.</div>
+              <div class="rk-pts">1.180</div>
+              <div class="rk-trend">🟢</div>
+            </div>
+            <div class="rk-item rk-green">
+              <div class="rk-pos" style="color:var(--blue2);">3</div>
+              <div class="rk-av" style="background:#378ADD;">CS</div>
+              <div class="rk-name" style="color:var(--blue2);">Carlos S. <span style="font-size:8px;opacity:.7;">← você</span></div>
+              <div class="rk-pts" style="color:var(--blue2);">1.095</div>
+              <div class="rk-trend">⬆️</div>
+            </div>
+            <div class="rk-item rk-green">
+              <div class="rk-pos">4</div>
+              <div class="rk-av" style="background:#4A5568;">BL</div>
+              <div class="rk-name">Bruno L.</div>
+              <div class="rk-pts">1.040</div>
+              <div class="rk-trend">➡️</div>
+            </div>
+            <div class="rk-item">
+              <div class="rk-pos">5</div>
+              <div class="rk-av" style="background:#553C2E;">MF</div>
+              <div class="rk-name">Marcos F.</div>
+              <div class="rk-pts">990</div>
+              <div class="rk-trend">⬇️</div>
+            </div>
+            <div class="rk-item rk-red">
+              <div class="rk-pos" style="color:#E05252;">6</div>
+              <div class="rk-av" style="background:#6B2D2D;">AF</div>
+              <div class="rk-name">Andre F.</div>
+              <div class="rk-pts">870</div>
+              <div class="rk-trend">🔴</div>
+            </div>
+            <div style="text-align:center;margin-top:9px;font-size:9.5px;color:var(--muted);border-top:1px solid var(--border);padding-top:7px;">
+              🔗 netcourt.com.br/seu-clube · Público
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">Classificação em tempo real</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     COMO FUNCIONA
+═══════════════════════════════════════════ -->
+<section id="como-funciona" class="section">
+  <div class="container">
+    <div class="steps-hdr">
+      <span class="section-label">Como funciona</span>
+      <h2 class="section-title">Do zero ao ranking<br>em menos de 5 minutos.</h2>
+      <p class="section-sub" style="margin:0 auto;">Sem instalação, sem treinamento, sem reunião de TI.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-icon">🏟️</div>
+        <h3 class="step-title">Crie seu clube</h3>
+        <p class="step-desc">Cadastre o nome, configure as classes (Classe 1A, 1B…) e defina os períodos de sorteio. Tudo em um formulário simples.</p>
+        <div class="step-meta">⏱ Menos de 2 minutos</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-icon">📲</div>
+        <h3 class="step-title">Convide seus atletas</h3>
+        <p class="step-desc">Compartilhe o link de convite por email ou WhatsApp. Sem App Store — o atleta abre pelo celular e já está dentro em 30 segundos.</p>
+        <div class="step-meta">⚡ Um link. Sem fricção.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-icon">🏆</div>
+        <h3 class="step-title">O ranking cuida do resto</h3>
+        <p class="step-desc">Sorteio automático por período, placares lançados pelos atletas, confirmação bilateral e classificação atualizada em tempo real.</p>
+        <div class="step-meta">🤖 Zero trabalho manual</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FUNCIONALIDADES
+═══════════════════════════════════════════ -->
+<section id="funcionalidades" class="section" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <span class="section-label">Funcionalidades</span>
+    <h2 class="section-title">Tudo que seu clube precisa.<br>Nada que vai complicar.</h2>
+    <div class="feat-tabs">
+      <button class="feat-tab active" onclick="switchTab('atleta',this)">🎾 Para o atleta</button>
+      <button class="feat-tab"        onclick="switchTab('admin', this)">🛠️ Para o admin</button>
+    </div>
+
+    <!-- Atleta -->
+    <div class="feat-grid" id="tab-atleta">
+      <div class="feat-card">
+        <div class="feat-icon">📊</div>
+        <div class="feat-title">Classificação em tempo real</div>
+        <p class="feat-desc">Top 4 em verde, últimos em vermelho, setas de tendência dos últimos 15 dias e histórico H2H ao clicar em qualquer atleta.</p>
+        <div class="feat-hook">💡 Atletas abrem o app todo dia para checar a posição</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔥</div>
+        <div class="feat-title">Ofensiva de vitórias</div>
+        <p class="feat-desc">Sequência de vitórias exibida no perfil. Atletas não querem perder a ofensiva — e jogam mais para mantê-la.</p>
+        <div class="feat-hook">💡 O gatilho de engajamento mais poderoso do app</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🏅</div>
+        <div class="feat-title">Conquistas desbloqueáveis</div>
+        <p class="feat-desc">Top 3, Top 5, 3 vitórias seguidas, 10 jogos, 60% de aproveitamento — cada conquista aparece no perfil do atleta.</p>
+        <div class="feat-hook">💡 Gamificação sem precisar de prêmios físicos</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💬</div>
+        <div class="feat-title">WhatsApp integrado</div>
+        <p class="feat-desc">Cada jogo pendente tem botão direto para o WhatsApp do adversário. Sem procurar número, sem grupo bagunçado.</p>
+        <div class="feat-hook">💡 Jogos combinados em 1 clique</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">👤</div>
+        <div class="feat-title">Perfil do atleta</div>
+        <p class="feat-desc">Foto, gráfico de desempenho dos últimos 6 meses, aproveitamento, saldo de games/sets e conquistas desbloqueadas.</p>
+        <div class="feat-hook">💡 Atletas adoram compartilhar o perfil</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📱</div>
+        <div class="feat-title">App sem App Store</div>
+        <p class="feat-desc">PWA instalável direto pelo link. Parece app nativo, funciona offline, fica na tela inicial. Sem Google Play, sem App Store.</p>
+        <div class="feat-hook">💡 Taxa de adoção muito maior que apps tradicionais</div>
+      </div>
+    </div>
+
+    <!-- Admin -->
+    <div class="feat-grid" id="tab-admin" style="display:none;">
+      <div class="feat-card">
+        <div class="feat-icon">🎲</div>
+        <div class="feat-title">Sorteio automático</div>
+        <p class="feat-desc">Configure o período e o NetCourt sorteia os confrontos automaticamente, equilibrando classes e evitando repetições recentes.</p>
+        <div class="feat-hook">💡 Zero planilha, zero WhatsApp de organização</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">✅</div>
+        <div class="feat-title">Confirmação bilateral</div>
+        <p class="feat-desc">Placar só é validado quando ambos confirmam. Fim das disputas de resultado e dos placares contestados.</p>
+        <div class="feat-hook">💡 Elimina 100% das discussões de placar</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🏗️</div>
+        <div class="feat-title">Rankings ilimitados</div>
+        <p class="feat-desc">Tênis Simples, Beach Tênis, Classe A, Classe B, Feminino, Veteranos — tudo no mesmo clube, sem custo adicional.</p>
+        <div class="feat-hook">💡 Um clube, múltiplas modalidades</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📈</div>
+        <div class="feat-title">Dashboard do admin</div>
+        <p class="feat-desc">Indicadores do clube, jogos urgentes (próximos do vencimento), rankings ativos e métricas de engajamento dos atletas.</p>
+        <div class="feat-hook">💡 Visão completa em 10 segundos</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔗</div>
+        <div class="feat-title">Link único do clube</div>
+        <p class="feat-desc">URL pública com o ranking completo — compartilhe nas redes sociais ou no grupo do WhatsApp. Cada atleta vira promotor.</p>
+        <div class="feat-hook">💡 Marketing orgânico que se faz sozinho</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">👥</div>
+        <div class="feat-title">Gestão de atletas</div>
+        <p class="feat-desc">Convite por email, controle de membros, múltiplos admins — tudo sem precisar de TI ou treinamento especializado.</p>
+        <div class="feat-hook">💡 Onboarding de atleta em menos de 1 minuto</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     DIFERENCIAIS (antes dos planos — intencional)
+═══════════════════════════════════════════ -->
+<section id="diferenciais" class="section">
+  <div class="container">
+    <div style="text-align:center;max-width:520px;margin:0 auto 40px;">
+      <span class="section-label">Por que o NetCourt</span>
+      <h2 class="section-title">A diferença que seus<br>atletas vão sentir.</h2>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card">
+        <div class="dif-ico">📵</div>
+        <div>
+          <div class="dif-title">Sem App Store</div>
+          <p class="dif-desc">PWA instalável pelo link. Nenhum atleta precisa procurar na loja, criar conta de loja ou liberar espaço no celular.</p>
+        </div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-ico">🔗</div>
+        <div>
+          <div class="dif-title">Link único do clube</div>
+          <p class="dif-desc">URL pública com o ranking completo. Compartilhe e deixe seus atletas fazerem o marketing por você.</p>
+        </div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-ico">💬</div>
+        <div>
+          <div class="dif-title">WhatsApp nativo</div>
+          <p class="dif-desc">Combine jogos em 1 clique direto do app. Sem grupos bagunçados, sem ficar procurando número na agenda.</p>
+        </div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-ico">🌐</div>
+        <div>
+          <div class="dif-title">Ranking público</div>
+          <p class="dif-desc">Cada atleta pode mostrar sua posição para qualquer pessoa — mesmo quem não é do clube. Isso atrai novos membros.</p>
+        </div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-ico">🎮</div>
+        <div>
+          <div class="dif-title">Gamificação real</div>
+          <p class="dif-desc">Ofensivas, conquistas e tendências de posição criam o mesmo engajamento do Duolingo — atletas voltam todo dia.</p>
+        </div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-ico">⚡</div>
+        <div>
+          <div class="dif-title">Tempo real</div>
+          <p class="dif-desc">Placar confirmado agora → classificação atualizada agora. Sem esperar o admin atualizar a planilha na segunda-feira.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PLANOS
+═══════════════════════════════════════════ -->
+<section id="planos" class="section" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="plans-hdr">
+      <span class="section-label">Planos</span>
+      <h2 class="section-title">Comece grátis.<br>Cresça quando quiser.</h2>
+      <p class="section-sub" style="margin:10px auto 0;">Sem contrato, sem taxa de implantação, sem surpresa na fatura.</p>
+    </div>
+    <div class="plans-grid">
+
+      <!-- Starter -->
+      <div class="plan-card">
+        <div class="plan-name">Starter</div>
+        <div><span class="plan-amount">R$ 0</span></div>
+        <p class="plan-note">Grátis para sempre no plano Starter</p>
+        <div class="plan-limit">🎾 Até 30 atletas · 1 ranking · 1 admin</div>
+        <ul class="plan-feats">
+          <li><span class="fi">✓</span> Ranking completo com classificação</li>
+          <li><span class="fi">✓</span> App PWA sem App Store</li>
+          <li><span class="fi">✓</span> Sorteio automático</li>
+          <li><span class="fi">✓</span> Confirmação bilateral de resultados</li>
+          <li><span class="fi">✓</span> WhatsApp integrado</li>
+          <li><span class="fi">✓</span> Perfil e conquistas do atleta</li>
+        </ul>
+        <a href="https://app.netcourt.com.br" class="btn-secondary" style="width:100%;justify-content:center;">
+          Criar clube grátis
+        </a>
+        <p class="plan-sub">Perfeito para começar. Upgrade instantâneo quando seu clube crescer.</p>
+      </div>
+
+      <!-- Club Mensal -->
+      <div class="plan-card">
+        <div class="plan-name">Club Mensal</div>
+        <div><span class="plan-amount">R$ 399</span><span class="plan-period">/mês</span></div>
+        <p class="plan-note">Cancele a qualquer momento</p>
+        <div class="plan-limit">♾️ Atletas, rankings e admins ilimitados</div>
+        <ul class="plan-feats">
+          <li><span class="fi">✓</span> Tudo do Starter</li>
+          <li><span class="fi">✓</span> Atletas ilimitados</li>
+          <li><span class="fi">✓</span> Rankings ilimitados</li>
+          <li><span class="fi">✓</span> Admins ilimitados</li>
+          <li><span class="fi">✓</span> Múltiplas modalidades</li>
+          <li><span class="fi">✓</span> Suporte prioritário</li>
+        </ul>
+        <a href="https://app.netcourt.com.br" class="btn-secondary" style="width:100%;justify-content:center;">
+          Assinar mensal
+        </a>
+      </div>
+
+      <!-- Club Anual — destaque -->
+      <div class="plan-card featured">
+        <div class="plan-badge">⭐ Mais popular · Economize R$ 1.200</div>
+        <div class="plan-name">Club Anual</div>
+        <div><span class="plan-amount">R$ 299</span><span class="plan-period">/mês</span></div>
+        <p class="plan-note" style="color:var(--green2);">Cobrado como R$ 3.588/ano · Você economiza R$ 1.200 vs mensal</p>
+        <div class="plan-limit">♾️ Atletas, rankings e admins ilimitados</div>
+        <ul class="plan-feats">
+          <li><span class="fi">✓</span> Tudo do Starter</li>
+          <li><span class="fi">✓</span> Atletas ilimitados</li>
+          <li><span class="fi">✓</span> Rankings ilimitados</li>
+          <li><span class="fi">✓</span> Admins ilimitados</li>
+          <li><span class="fi">✓</span> Múltiplas modalidades</li>
+          <li><span class="fi">✓</span> Suporte prioritário</li>
+        </ul>
+        <a href="https://app.netcourt.com.br" class="btn-primary" style="width:100%;justify-content:center;">
+          Assinar anual e economizar
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M7.5 3.5l4 3.5-4 3.5" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="plan-sub">25% mais barato que o mensal. Sem lock-in, suporte incluso.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA FINAL
+═══════════════════════════════════════════ -->
+<section id="cta-final">
+  <div class="cta-glow"></div>
+  <div class="cta-inner container">
+    <span class="section-label">Pronto para começar?</span>
+    <h2 class="cta-h2">Seu clube merece<br>um ranking que funciona.</h2>
+    <p class="cta-sub">Sem App Store. Sem planilha. Sem grupo de WhatsApp bagunçado.<br>Configure em 5 minutos e convide seus atletas hoje.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+      <a href="https://app.netcourt.com.br" class="btn-primary" style="font-size:16px;padding:15px 36px;">
+        Criar meu clube grátis
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="https://app.netcourt.com.br" class="btn-secondary" style="font-size:15px;">
+        Ver ranking de exemplo
+      </a>
+    </div>
+    <p class="cta-small">Grátis para sempre no plano Starter · Sem cartão de crédito</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo" aria-label="NetCourt">
+      <svg width="22" height="22" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+        <polygon points="14,9 21,9 18,35 10,35" fill="white"/>
+        <polygon points="23,9 30,9 34,35 26,35" fill="#38bfff"/>
+        <line x1="9" y1="26" x2="35" y2="26" stroke="#38bfff" stroke-width="2"/>
+      </svg>
+      <span class="footer-logo-text">NetCourt</span>
+    </a>
+    <div class="footer-links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#planos">Planos</a>
+      <a href="mailto:contato@netcourt.com.br">contato@netcourt.com.br</a>
+    </div>
+    <p class="footer-copy">© 2025 NetCourt · Todos os direitos reservados</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script>
+  // ── Mobile menu
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  function closeMenu() { mobileMenu.classList.remove('open'); burger.setAttribute('aria-expanded', false); }
+  document.addEventListener('click', (e) => {
+    if (!burger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
+  });
+
+  // ── Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(8,14,26,0.98)'
+      : 'rgba(8,14,26,0.90)';
+  }, { passive: true });
+
+  // ── Feature tabs
+  function switchTab(tab, btn) {
+    document.getElementById('tab-atleta').style.display = tab === 'atleta' ? 'grid' : 'none';
+    document.getElementById('tab-admin').style.display  = tab === 'admin'  ? 'grid' : 'none';
+    document.querySelectorAll('.feat-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // ── Animated proof counters — busca dados reais do app
+  // Endpoint: GET https://app.netcourt.com.br/api/public/stats
+  // Resposta esperada: { clubs: 47, athletes: 1200, games: 8400 }
+  // Se o endpoint não responder, usa os valores de fallback abaixo.
+  const FALLBACK = { clubs: 2, athletes: 200, games: 2100 };
+
+  function animateCount(el, end, suffix) {
+    if (!end) { el.textContent = '—'; return; }
+    let startTs = null;
+    const step = (ts) => {
+      if (!startTs) startTs = ts;
+      const p = Math.min((ts - startTs) / 1400, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * end).toLocaleString('pt-BR') + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  function renderStats(data) {
+    animateCount(document.getElementById('pn-clubs'),    data.clubs,    '');
+    animateCount(document.getElementById('pn-athletes'), data.athletes, '+');
+    animateCount(document.getElementById('pn-games'),    data.games,    '+');
+  }
+
+  async function fetchStats() {
+    try {
+      const res = await fetch('https://app.netcourt.com.br/api/public/stats', {
+        signal: AbortSignal.timeout(4000)   // desiste após 4 seg
+      });
+      if (!res.ok) throw new Error('status ' + res.status);
+      const data = await res.json();
+      return { clubs: data.clubs, athletes: data.athletes, games: data.games };
+    } catch {
+      return FALLBACK;   // endpoint ainda não existe? mostra —
+    }
+  }
+
+  const proofObs = new IntersectionObserver(async (entries) => {
+    if (entries[0].isIntersecting) {
+      proofObs.disconnect();
+      const stats = await fetchStats();
+      renderStats(stats);
+    }
+  }, { threshold: 0.4 });
+
+  const proofBar = document.querySelector('.proof-bar');
+  if (proofBar) proofObs.observe(proofBar);
+
+  // ── Lead modal — intercepta todos os botões primários de CTA
+  document.querySelectorAll('.btn-primary[href="https://app.netcourt.com.br"]').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openLeadModal();
+    });
+  });
+
+  function openLeadModal() {
+    document.getElementById('lead-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('lead-nome').focus(), 100);
+  }
+
+  function closeLeadModal() {
+    document.getElementById('lead-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Fechar ao clicar fora
+  document.getElementById('lead-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeLeadModal();
+  });
+
+  // Fechar com Esc
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLeadModal();
+  });
+
+  // Envio do formulário via Formspree
+  document.getElementById('lead-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('lead-submit');
+    btn.textContent = 'Enviando…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/mzdqejzk', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(this),
+      });
+      if (res.ok) {
+        document.getElementById('lead-form-wrap').style.display = 'none';
+        document.getElementById('lead-success').style.display = 'flex';
+      } else {
+        throw new Error();
+      }
+    } catch {
+      btn.textContent = 'Erro — tente novamente';
+      btn.disabled = false;
+    }
+  });
+</script>
+
+<!-- ═══════════════════════════════════════════
+     MODAL DE CAPTURA DE LEAD
+═══════════════════════════════════════════ -->
+<div id="lead-modal" style="
+  display:none; position:fixed; inset:0; z-index:999;
+  background:rgba(4,8,18,0.88);
+  backdrop-filter:blur(6px);
+  align-items:center; justify-content:center;
+  padding:20px;
+">
+  <div style="
+    background:#0D1628; border:1px solid rgba(55,138,221,0.30);
+    border-radius:16px; width:100%; max-width:460px;
+    box-shadow:0 24px 80px rgba(0,0,0,0.7);
+    overflow:hidden; position:relative;
+  ">
+    <!-- Header -->
+    <div style="padding:24px 28px 0; display:flex; justify-content:space-between; align-items:flex-start;">
+      <div>
+        <div style="font-family:'DM Serif Display',serif; font-size:22px; color:#E8EDF5; margin-bottom:6px;">
+          Quero conhecer o NetCourt
+        </div>
+        <p style="font-size:14px; color:#6B7FA8; line-height:1.5;">
+          Preencha abaixo e entraremos em contato em breve para configurar seu clube.
+        </p>
+      </div>
+      <button onclick="closeLeadModal()" style="
+        background:none; border:none; cursor:pointer;
+        color:#6B7FA8; font-size:22px; padding:0 0 0 12px; line-height:1;
+        flex-shrink:0; margin-top:2px;
+      ">✕</button>
+    </div>
+
+    <!-- Form -->
+    <div id="lead-form-wrap" style="padding:20px 28px 28px;">
+      <form id="lead-form" style="display:flex; flex-direction:column; gap:14px;">
+        <input type="hidden" name="_subject" value="🎾 Novo interessado — NetCourt" />
+
+        <div>
+          <label style="display:block; font-size:12px; font-weight:700; color:#6B7FA8; margin-bottom:5px; text-transform:uppercase; letter-spacing:.06em;">
+            Seu nome *
+          </label>
+          <input id="lead-nome" type="text" name="nome" required placeholder="João Silva"
+            style="width:100%; background:#080E1A; border:1px solid rgba(55,138,221,0.25); border-radius:8px; padding:10px 14px; color:#E8EDF5; font-size:14px; font-family:'DM Sans',sans-serif; outline:none;"
+            onfocus="this.style.borderColor='rgba(55,138,221,0.6)'"
+            onblur="this.style.borderColor='rgba(55,138,221,0.25)'" />
+        </div>
+
+        <div>
+          <label style="display:block; font-size:12px; font-weight:700; color:#6B7FA8; margin-bottom:5px; text-transform:uppercase; letter-spacing:.06em;">
+            E-mail *
+          </label>
+          <input type="email" name="email" required placeholder="joao@seuclube.com.br"
+            style="width:100%; background:#080E1A; border:1px solid rgba(55,138,221,0.25); border-radius:8px; padding:10px 14px; color:#E8EDF5; font-size:14px; font-family:'DM Sans',sans-serif; outline:none;"
+            onfocus="this.style.borderColor='rgba(55,138,221,0.6)'"
+            onblur="this.style.borderColor='rgba(55,138,221,0.25)'" />
+        </div>
+
+        <div>
+          <label style="display:block; font-size:12px; font-weight:700; color:#6B7FA8; margin-bottom:5px; text-transform:uppercase; letter-spacing:.06em;">
+            Nome do clube *
+          </label>
+          <input type="text" name="clube" required placeholder="Tennis Club São Paulo"
+            style="width:100%; background:#080E1A; border:1px solid rgba(55,138,221,0.25); border-radius:8px; padding:10px 14px; color:#E8EDF5; font-size:14px; font-family:'DM Sans',sans-serif; outline:none;"
+            onfocus="this.style.borderColor='rgba(55,138,221,0.6)'"
+            onblur="this.style.borderColor='rgba(55,138,221,0.25)'" />
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div>
+            <label style="display:block; font-size:12px; font-weight:700; color:#6B7FA8; margin-bottom:5px; text-transform:uppercase; letter-spacing:.06em;">
+              WhatsApp
+            </label>
+            <input type="tel" name="whatsapp" placeholder="(11) 99999-9999"
+              style="width:100%; background:#080E1A; border:1px solid rgba(55,138,221,0.25); border-radius:8px; padding:10px 14px; color:#E8EDF5; font-size:14px; font-family:'DM Sans',sans-serif; outline:none;"
+              onfocus="this.style.borderColor='rgba(55,138,221,0.6)'"
+              onblur="this.style.borderColor='rgba(55,138,221,0.25)'" />
+          </div>
+          <div>
+            <label style="display:block; font-size:12px; font-weight:700; color:#6B7FA8; margin-bottom:5px; text-transform:uppercase; letter-spacing:.06em;">
+              Modalidade
+            </label>
+            <select name="modalidade"
+              style="width:100%; background:#080E1A; border:1px solid rgba(55,138,221,0.25); border-radius:8px; padding:10px 14px; color:#E8EDF5; font-size:14px; font-family:'DM Sans',sans-serif; outline:none; cursor:pointer;"
+              onfocus="this.style.borderColor='rgba(55,138,221,0.6)'"
+              onblur="this.style.borderColor='rgba(55,138,221,0.25)'">
+              <option value="Tênis">Tênis</option>
+              <option value="Beach Tênis">Beach Tênis</option>
+              <option value="Ambos">Ambos</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="lead-submit" type="submit" style="
+          background:linear-gradient(135deg,#378ADD,#5BA3F5);
+          border:none; border-radius:10px; padding:13px;
+          color:#fff; font-size:15px; font-weight:700;
+          font-family:'DM Sans',sans-serif; cursor:pointer;
+          box-shadow:0 4px 20px rgba(55,138,221,0.40);
+          margin-top:4px; transition:opacity .15s;
+        ">
+          Enviar interesse →
+        </button>
+
+        <p style="text-align:center; font-size:12px; color:#6B7FA8; margin:0;">
+          Sem spam. Entraremos em contato apenas para configurar seu clube.
+        </p>
+      </form>
+    </div>
+
+    <!-- Success state -->
+    <div id="lead-success" style="
+      display:none; flex-direction:column; align-items:center;
+      padding:40px 28px 44px; text-align:center; gap:12px;
+    ">
+      <div style="font-size:48px;">🎉</div>
+      <div style="font-family:'DM Serif Display',serif; font-size:22px; color:#E8EDF5;">
+        Recebemos seu interesse!
+      </div>
+      <p style="font-size:14px; color:#6B7FA8; line-height:1.6; max-width:320px;">
+        Entraremos em contato em breve pelo e-mail informado para configurar o ranking do seu clube.
+      </p>
+      <button onclick="closeLeadModal()" style="
+        background:linear-gradient(135deg,#1D9E75,#2DC994);
+        border:none; border-radius:10px; padding:11px 28px;
+        color:#fff; font-size:14px; font-weight:700;
+        font-family:'DM Sans',sans-serif; cursor:pointer; margin-top:8px;
+      ">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  #lead-modal { display: none; }
+  #lead-modal.open { display: flex; }
+</style>
+
+</body>
+</html>
