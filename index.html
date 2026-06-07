@@ -1166,17 +1166,26 @@
 
   // Botões usam onclick direto no HTML — sem necessidade de querySelectorAll
 
-  // Fechar ao clicar fora
-  document.getElementById('lead-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeLeadModal();
-  });
+  // Aguarda o HTML completo (modal vem depois do script)
+  window.addEventListener('load', function() {
 
-  // Fechar com Esc
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLeadModal();
-  });
+    // Fechar ao clicar fora
+    var modalEl = document.getElementById('lead-modal');
+    if (modalEl) {
+      modalEl.addEventListener('click', function(e) {
+        if (e.target === this) closeLeadModal();
+      });
+    }
+
+    // Fechar com Esc
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLeadModal();
+    });
+
+  }); // fim window.load
 
   // Envio do formulário via Formspree
+  window.addEventListener('load', function() {
   document.getElementById('lead-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('lead-submit');
@@ -1200,6 +1209,18 @@
       btn.disabled = false;
     }
   });
+  }); // fim window.load submit
+
+  // Mostra banner de sucesso quando retorna do Formspree
+  if (window.location.search.includes('obrigado=1')) {
+    var banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:9999;background:linear-gradient(135deg,#1D9E75,#2DC994);color:#fff;padding:14px 28px;border-radius:12px;font-family:DM Sans,sans-serif;font-size:15px;font-weight:700;box-shadow:0 8px 32px rgba(29,158,117,0.4);text-align:center;';
+    banner.innerHTML = '🎉 Recebemos seu interesse! Entraremos em contato em breve.';
+    document.body.appendChild(banner);
+    setTimeout(function() { banner.remove(); }, 6000);
+    // Clean URL
+    window.history.replaceState({}, '', window.location.pathname);
+  }
 </script>
 
 <!-- ═══════════════════════════════════════════
@@ -1237,8 +1258,9 @@
 
     <!-- Form -->
     <div id="lead-form-wrap" style="padding:20px 28px 28px;">
-      <form id="lead-form" style="display:flex; flex-direction:column; gap:14px;">
+      <form id="lead-form" action="https://formspree.io/f/mzdqejzk" method="POST" style="display:flex; flex-direction:column; gap:14px;">
         <input type="hidden" name="_subject" value="🎾 Novo interessado — NetCourt" />
+        <input type="hidden" name="_next" value="https://www.netcourt.com.br?obrigado=1" />
 
         <div>
           <label style="display:block; font-size:12px; font-weight:700; color:#6B7FA8; margin-bottom:5px; text-transform:uppercase; letter-spacing:.06em;">
