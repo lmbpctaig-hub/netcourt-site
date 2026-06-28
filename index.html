@@ -520,6 +520,7 @@
     <div class="nav-links">
       <a href="#como-funciona">Como funciona</a>
       <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#agenda">Agenda</a>
       <a href="#planos">Planos</a>
     </div>
     <div class="nav-right">
@@ -840,6 +841,24 @@
         <p class="feat-desc">PWA instalável direto pelo link. Parece app nativo, funciona offline, fica na tela inicial. Sem Google Play, sem App Store.</p>
         <div class="feat-hook">💡 Taxa de adoção muito maior que apps tradicionais</div>
       </div>
+      <div class="feat-card">
+        <div class="feat-icon">⚔️</div>
+        <div class="feat-title">Desafios e H2H</div>
+        <p class="feat-desc">Desafie qualquer atleta do clube diretamente pelo app. Histórico completo de confrontos entre os dois — placar, data e quem lidera a série.</p>
+        <div class="feat-hook">💡 A rivalidade que mantém o atleta voltando toda semana</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎾</div>
+        <div class="feat-title">Jogo avulso</div>
+        <p class="feat-desc">Registre jogos fora do ranking — amistosos, treinos e partidas com convidados externos. Tudo documentado, sem impactar a classificação oficial.</p>
+        <div class="feat-hook">💡 Cada jogo conta, mesmo os que não valem pontos</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📅</div>
+        <div class="feat-title">Reserve sua quadra</div>
+        <p class="feat-desc">Veja a disponibilidade das quadras em tempo real e faça sua reserva pelo app. Lista de espera automática se o horário estiver cheio.</p>
+        <div class="feat-hook">💡 Sem precisar ligar ou mandar mensagem para o clube</div>
+      </div>
     </div>
 
     <!-- Admin -->
@@ -880,6 +899,150 @@
         <p class="feat-desc">Convite por email, controle de membros, múltiplos admins — tudo sem precisar de TI ou treinamento especializado.</p>
         <div class="feat-hook">💡 Onboarding de atleta em menos de 1 minuto</div>
       </div>
+      <div class="feat-card">
+        <div class="feat-icon">📅</div>
+        <div class="feat-title">Agenda de quadras</div>
+        <p class="feat-desc">Gerencie reservas, horários e capacidade das quadras do clube. Lista de espera automática, controle de no-show e bloqueios de manutenção.</p>
+        <div class="feat-hook">💡 Fim dos conflitos de horário e das planilhas de reserva</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⚔️</div>
+        <div class="feat-title">Gestão de desafios</div>
+        <p class="feat-desc">Acompanhe todos os desafios do clube — pendentes, confirmados e expirados. Aprove resultados e resolva contestações em um lugar só.</p>
+        <div class="feat-hook">💡 Controle total sobre a competição entre atletas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     AGENDA DE QUADRAS — seção dedicada
+═══════════════════════════════════════════ -->
+<section id="agenda" class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+
+      <!-- Left: copy -->
+      <div>
+        <span class="section-label">Agenda de Quadras</span>
+        <h2 class="section-title">Reserve sua quadra.<br>Do app, em segundos.</h2>
+        <p class="section-sub" style="margin-bottom:32px;">
+          Chega de ligar para o clube, mandar mensagem e esperar confirmação. O NetCourt tem agenda integrada — atleta vê os horários disponíveis e reserva direto pelo celular.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:36px;height:36px;border-radius:9px;background:rgba(55,138,221,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📅</div>
+            <div>
+              <div style="font-size:14px;font-weight:700;margin-bottom:3px;">Agenda visual em tempo real</div>
+              <div style="font-size:13px;color:var(--muted);line-height:1.6;">Veja todos os horários disponíveis e ocupados. Reserva confirmada instantaneamente.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:36px;height:36px;border-radius:9px;background:rgba(55,138,221,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⏳</div>
+            <div>
+              <div style="font-size:14px;font-weight:700;margin-bottom:3px;">Lista de espera automática</div>
+              <div style="font-size:13px;color:var(--muted);line-height:1.6;">Horário cheio? Atleta entra na fila. Se alguém cancelar, o próximo da lista é avisado automaticamente.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:36px;height:36px;border-radius:9px;background:rgba(29,158,117,.10);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✅</div>
+            <div>
+              <div style="font-size:14px;font-weight:700;margin-bottom:3px;">Controle de presenças e no-show</div>
+              <div style="font-size:13px;color:var(--muted);line-height:1.6;">Admin registra quem compareceu. Histórico completo de uso das quadras por atleta.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:36px;height:36px;border-radius:9px;background:rgba(55,138,221,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚙️</div>
+            <div>
+              <div style="font-size:14px;font-weight:700;margin-bottom:3px;">Configuração flexível</div>
+              <div style="font-size:13px;color:var(--muted);line-height:1.6;">Defina capacidade, horários disponíveis, bloqueios de manutenção e regras por quadra.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: visual mockup of agenda -->
+      <div style="display:flex;justify-content:center;">
+        <div style="width:300px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.4);">
+
+          <!-- Header -->
+          <div style="background:var(--bg);padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text);">Reservar Quadra</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:1px;">Quarta-feira, 25 jun</div>
+            </div>
+            <div style="font-size:11px;font-weight:700;color:var(--blue2);background:rgba(55,138,221,.1);border:1px solid rgba(55,138,221,.2);border-radius:6px;padding:3px 10px;">3 livres</div>
+          </div>
+
+          <!-- Timeline slots -->
+          <div style="padding:10px 12px;display:flex;flex-direction:column;gap:6px;">
+
+            <!-- Slot ocupado -->
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div style="font-size:10px;font-weight:600;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">07:00</div>
+              <div style="flex:1;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:7px;padding:7px 10px;">
+                <div style="font-size:10.5px;font-weight:700;color:rgba(239,68,68,.8);">Quadra 1 — Ocupada</div>
+                <div style="font-size:9.5px;color:var(--muted);margin-top:1px;">João P. + Carlos S.</div>
+              </div>
+            </div>
+
+            <!-- Slot livre - destacado -->
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div style="font-size:10px;font-weight:600;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">08:00</div>
+              <div style="flex:1;background:rgba(29,158,117,.1);border:1.5px solid rgba(29,158,117,.35);border-radius:7px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="font-size:10.5px;font-weight:700;color:var(--green2);">Quadra 1 — Livre</div>
+                  <div style="font-size:9.5px;color:var(--muted);margin-top:1px;">1h · até 4 atletas</div>
+                </div>
+                <div style="font-size:9px;font-weight:800;color:white;background:var(--green);border-radius:5px;padding:3px 8px;">Reservar</div>
+              </div>
+            </div>
+
+            <!-- Slot livre -->
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div style="font-size:10px;font-weight:600;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">09:00</div>
+              <div style="flex:1;background:rgba(29,158,117,.06);border:1px solid rgba(29,158,117,.2);border-radius:7px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="font-size:10.5px;font-weight:700;color:rgba(45,201,148,.8);">Quadra 2 — Livre</div>
+                  <div style="font-size:9.5px;color:var(--muted);margin-top:1px;">1h · até 4 atletas</div>
+                </div>
+                <div style="font-size:9px;font-weight:800;color:white;background:rgba(29,158,117,.7);border-radius:5px;padding:3px 8px;">Reservar</div>
+              </div>
+            </div>
+
+            <!-- Slot ocupado com lista de espera -->
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div style="font-size:10px;font-weight:600;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">10:00</div>
+              <div style="flex:1;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:7px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="font-size:10.5px;font-weight:700;color:rgba(245,158,11,.85);">Quadra 1 — Lotada</div>
+                  <div style="font-size:9.5px;color:var(--muted);margin-top:1px;">2 na fila de espera</div>
+                </div>
+                <div style="font-size:9px;font-weight:800;color:rgba(245,158,11,.9);border:1px solid rgba(245,158,11,.3);border-radius:5px;padding:3px 8px;background:rgba(245,158,11,.08);">Fila</div>
+              </div>
+            </div>
+
+            <!-- Slot livre -->
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div style="font-size:10px;font-weight:600;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">11:00</div>
+              <div style="flex:1;background:rgba(29,158,117,.06);border:1px solid rgba(29,158,117,.2);border-radius:7px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                  <div style="font-size:10.5px;font-weight:700;color:rgba(45,201,148,.8);">Quadra 2 — Livre</div>
+                  <div style="font-size:9.5px;color:var(--muted);margin-top:1px;">1h · até 4 atletas</div>
+                </div>
+                <div style="font-size:9px;font-weight:800;color:white;background:rgba(29,158,117,.7);border-radius:5px;padding:3px 8px;">Reservar</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Footer -->
+          <div style="padding:10px 14px 14px;border-top:1px solid var(--border);text-align:center;">
+            <div style="font-size:9.5px;color:var(--muted);">📱 Reserva confirmada instantaneamente · sem ligar para o clube</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1059,9 +1222,9 @@
     <div class="footer-links">
       <a href="#como-funciona">Como funciona</a>
       <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#agenda">Agenda</a>
       <a href="#planos">Planos</a>
       <a href="mailto:contato@netcourt.com.br">contato@netcourt.com.br</a>
-      <a href="/marca">Manual de marca</a>
     </div>
     <p class="footer-copy">© 2025 NetCourt · Todos os direitos reservados</p>
   </div>
