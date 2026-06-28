@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NetCourt — Manual de Marca v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,sans-serif;background:#F8FAFC;color:#0C1220;line-height:1.55;}
+
+:root{
+  --night:  #0C1220;
+  --slate:  #1E293B;
+  --blue:   #0369A1;
+  --net:    #38BDF8;
+  --base:   #F1F5F9;
+  --fafc:   #F8FAFC;
+  --muted:  #64748B;
+  --light:  #94A3B8;
+  --border: #E2E8F0;
+  --white:  #FFFFFF;
+}
+
+/* ── Layout ── */
+.layout{display:grid;grid-template-columns:200px 1fr;min-height:100vh;}
+
+/* ── Sidebar ── */
+aside{
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  background:var(--night);padding:28px 18px;
+  display:flex;flex-direction:column;gap:2px;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+.aside-logo{display:flex;align-items:center;gap:9px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.07);}
+.aside-logo-name{font-size:15px;font-weight:900;color:var(--white);letter-spacing:-.01em;}
+.aside-logo-name span{color:var(--net);}
+.aside-logo-ver{font-size:10px;color:rgba(255,255,255,.3);margin-top:1px;letter-spacing:.04em;}
+.nav-group{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.22);padding:14px 7px 5px;margin-top:6px;}
+aside a{display:block;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.5);text-decoration:none;padding:6px 7px;border-radius:5px;transition:all .12s;}
+aside a:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.05);}
+aside a.on{color:var(--net);background:rgba(56,189,248,.09);}
+
+/* ── Main ── */
+main{overflow-x:hidden;}
+
+/* ── Section primitives ── */
+.sec{padding:60px 64px 68px;border-bottom:1px solid var(--border);}
+.sec:last-child{border-bottom:none;}
+.sec-dark{background:var(--night);}
+.sec-slate{background:var(--slate);}
+.sec-base{background:var(--base);}
+
+.eye{font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:9px;display:block;}
+.eye-net{color:var(--net);}
+.eye-lt{color:rgba(56,189,248,.7);}
+.h2{font-family:'DM Serif Display',serif;font-size:34px;letter-spacing:-.02em;color:var(--night);margin-bottom:10px;line-height:1.15;}
+.h2-lt{color:var(--white);}
+.lead{font-size:14.5px;color:var(--muted);line-height:1.7;max-width:600px;margin-bottom:44px;}
+.lead-lt{color:rgba(255,255,255,.52);}
+.lead strong{color:var(--night);font-weight:600;}
+.lead-lt strong{color:rgba(255,255,255,.85);}
+
+/* Net rule */
+.nr{height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.4),transparent);margin:44px 0;}
+.nr-s{margin:28px 0;}
+
+/* ── Grid helpers ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+
+/* ── Cards ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px 22px;}
+.card-dk{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:20px 22px;}
+.card-net{background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.2);border-radius:10px;padding:16px 18px;}
+
+/* ── COVER ── */
+.cover{
+  min-height:520px;background:var(--night);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:64px;
+}
+.cover-glow{position:absolute;top:-240px;right:-160px;width:720px;height:720px;background:radial-gradient(circle,rgba(56,189,248,.11) 0%,transparent 62%);pointer-events:none;}
+.cover-glow2{position:absolute;bottom:-120px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(3,105,161,.08) 0%,transparent 70%);pointer-events:none;}
+.cover-hl{font-family:'DM Serif Display',serif;font-size:68px;line-height:1.06;letter-spacing:-.025em;color:var(--white);margin-bottom:12px;position:relative;z-index:1;}
+.cover-hl em{font-style:normal;color:var(--net);}
+.cover-sub{font-size:15px;color:rgba(255,255,255,.38);position:relative;z-index:1;}
+.cover-badge{position:absolute;top:56px;right:64px;text-align:right;z-index:1;}
+.cover-badge-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);}
+.cover-badge-val{font-size:12.5px;color:rgba(255,255,255,.45);margin-top:3px;}
+
+/* ── Exact SVG logo helpers ── */
+/* The normalized icon uses viewBox 0 0 240 240 */
+
+/* ── Logo showcase boxes ── */
+.lbox{border-radius:14px;padding:44px;display:flex;align-items:center;justify-content:center;position:relative;}
+.lbox label{position:absolute;bottom:12px;left:18px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+.lbox-dark{background:var(--night);}
+.lbox-dark label{color:rgba(255,255,255,.28);}
+.lbox-slate{background:var(--slate);}
+.lbox-slate label{color:rgba(255,255,255,.28);}
+.lbox-blue{background:var(--blue);}
+.lbox-blue label{color:rgba(255,255,255,.35);}
+.lbox-light{background:var(--base);border:1px solid var(--border);}
+.lbox-light label{color:var(--light);}
+.lbox-net{background:var(--net);}
+.lbox-net label{color:rgba(12,18,32,.5);}
+
+/* ── Wordmark composer ── */
+.wm{display:inline-flex;flex-direction:column;}
+.wm-row{display:flex;align-items:baseline;}
+.wm-net{font-family:'Inter',sans-serif;font-weight:900;color:var(--white);letter-spacing:-.02em;}
+.wm-court{font-family:'Inter',sans-serif;font-weight:900;color:var(--net);letter-spacing:-.02em;}
+.wm-tag{font-family:'Inter',sans-serif;font-weight:300;letter-spacing:.14em;text-transform:uppercase;color:#475569;margin-top:.1em;}
+/* dark on light bg */
+.wm-lt .wm-net{color:var(--night);}
+.wm-lt .wm-court{color:var(--blue);}
+.wm-lt .wm-tag{color:var(--light);}
+/* all white */
+.wm-wh .wm-net{color:var(--white);}
+.wm-wh .wm-court{color:var(--white);}
+.wm-wh .wm-tag{color:rgba(255,255,255,.5);}
+/* dark on net bg */
+.wm-nt .wm-net{color:var(--night);}
+.wm-nt .wm-court{color:var(--night);}
+.wm-nt .wm-tag{color:rgba(12,18,32,.5);}
+
+/* ── Color swatches ── */
+.swatch-chip{height:80px;border-radius:10px;margin-bottom:10px;border:1px solid transparent;}
+.swatch-name{font-size:13px;font-weight:700;margin-bottom:2px;color:var(--night);}
+.swatch-role{font-size:11px;color:var(--muted);margin-bottom:6px;}
+.swatch-hex{font-family:'SF Mono','Fira Code',monospace;font-size:11.5px;background:rgba(0,0,0,.06);padding:2px 8px;border-radius:4px;color:var(--night);}
+
+/* ── Spec table ── */
+.tbl{width:100%;border-collapse:collapse;font-size:13px;}
+.tbl th{text-align:left;padding:8px 12px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light);border-bottom:2px solid var(--border);}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--border);color:var(--slate);vertical-align:top;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl td:first-child{color:var(--night);font-weight:600;}
+.tbl-dk th{color:rgba(255,255,255,.28);border-bottom-color:rgba(255,255,255,.09);}
+.tbl-dk td{color:rgba(255,255,255,.62);border-bottom-color:rgba(255,255,255,.07);}
+.tbl-dk td:first-child{color:rgba(255,255,255,.85);}
+.tbl-dk tr:last-child td{border-bottom:none;}
+mono{font-family:'SF Mono','Fira Code',monospace;font-size:.9em;background:rgba(0,0,0,.06);padding:2px 7px;border-radius:4px;}
+mono-dk{font-family:'SF Mono','Fira Code',monospace;font-size:.9em;background:rgba(255,255,255,.09);padding:2px 7px;border-radius:4px;color:var(--net);}
+
+/* ── Type rows ── */
+.type-row{display:flex;align-items:baseline;gap:24px;padding:18px 0;border-bottom:1px solid var(--border);}
+.type-row:last-child{border-bottom:none;}
+.type-spec{min-width:190px;flex-shrink:0;}
+.ts-name{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--light);margin-bottom:3px;}
+.ts-detail{font-size:11.5px;color:var(--muted);font-family:'SF Mono','Fira Code',monospace;}
+
+/* ── Don't cards ── */
+.dont-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.dont-card{border-radius:10px;overflow:hidden;}
+.dont-pre{height:140px;display:flex;align-items:center;justify-content:center;}
+.dont-cap{padding:11px 14px;background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 10px 10px;}
+.dont-no{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#DC2626;margin-bottom:3px;}
+.dont-yes{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:3px;}
+.dont-desc{font-size:11.5px;color:var(--muted);line-height:1.45;}
+
+/* ── Voice cards ── */
+.voice-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px 22px;}
+.voice-tag-y{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.voice-tag-n{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#DC2626;margin-bottom:12px;}
+.voice-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.voice-card li{font-size:13px;display:flex;gap:9px;line-height:1.5;color:var(--night);}
+
+/* ── App mockups ── */
+.app-card{border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+.app-pre{display:flex;align-items:center;justify-content:center;padding:36px;}
+.app-meta{padding:14px 16px;background:var(--white);border-top:1px solid var(--border);}
+.app-title{font-size:12.5px;font-weight:700;margin-bottom:3px;}
+.app-desc{font-size:11.5px;color:var(--muted);line-height:1.5;}
+
+/* ── Copy pills ── */
+.copy-pill{background:var(--fafc);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-size:13.5px;font-style:italic;color:var(--night);line-height:1.55;margin-bottom:8px;}
+.copy-pill-dk{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:14px 16px;font-size:13.5px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.55;margin-bottom:8px;}
+
+/* ── Utility ── */
+.mt12{margin-top:12px;} .mt20{margin-top:20px;} .mt28{margin-top:28px;} .mt40{margin-top:40px;} .mt52{margin-top:52px;}
+.tag{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;}
+.tag-b{background:rgba(3,105,161,.09);color:var(--blue);border:1px solid rgba(3,105,161,.18);}
+.tag-n{background:rgba(56,189,248,.09);color:#0284C7;border:1px solid rgba(56,189,248,.22);}
+.tag-r{background:rgba(220,38,38,.08);color:#DC2626;border:1px solid rgba(220,38,38,.18);}
+.check{color:var(--blue);font-weight:700;margin-right:8px;}
+.cross{color:#DC2626;font-weight:700;margin-right:8px;}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- ══════════════════ SIDEBAR ══════════════════ -->
+<aside>
+  <div class="aside-logo">
+    <!-- Exact logo from SVG -->
+    <svg width="30" height="30" viewBox="0 0 240 240" fill="none">
+      <rect width="240" height="240" rx="48" fill="#0C1220"/>
+      <polygon points="48,170 88,44 110,44 110,170" fill="#FFFFFF"/>
+      <polygon points="130,44 152,44 192,170 130,170" fill="#FFFFFF"/>
+      <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+      <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+      <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+    </svg>
+    <div>
+      <div class="aside-logo-name">net<span>court</span></div>
+      <div class="aside-logo-ver">Manual de Marca · v2.0</div>
+    </div>
+  </div>
+
+  <div class="nav-group">Fundação</div>
+  <a href="#intro">Introdução</a>
+  <a href="#filosofia">Filosofia</a>
+
+  <div class="nav-group">Símbolo</div>
+  <a href="#simbolo">Anatomia</a>
+  <a href="#logotipo">Logotipo</a>
+  <a href="#variantes">Variantes</a>
+  <a href="#escala">Escala & Espaço</a>
+  <a href="#incorreto">Usos proibidos</a>
+
+  <div class="nav-group">Sistema visual</div>
+  <a href="#cores">Cores</a>
+  <a href="#tipografia">Tipografia</a>
+  <a href="#grid">Grid & Espaçamento</a>
+
+  <div class="nav-group">Aplicações</div>
+  <a href="#digital">Digital</a>
+  <a href="#social">Redes sociais</a>
+  <a href="#motion">Motion</a>
+
+  <div class="nav-group">Comunicação</div>
+  <a href="#voz">Tom de voz</a>
+  <a href="#copy">Copy de referência</a>
+</aside>
+
+<!-- ══════════════════ MAIN ══════════════════ -->
+<main>
+
+<!-- CAPA -->
+<div class="cover" id="intro">
+  <div class="cover-glow"></div>
+  <div class="cover-glow2"></div>
+  <div class="cover-badge">
+    <div class="cover-badge-label">Versão</div>
+    <div class="cover-badge-val">2.0 · 2025</div>
+    <div class="cover-badge-label" style="margin-top:16px;">Documento</div>
+    <div class="cover-badge-val">Brand Guidelines</div>
+    <div class="cover-badge-label" style="margin-top:16px;">Produto</div>
+    <div class="cover-badge-val">SaaS · Esportes de raquete</div>
+  </div>
+
+  <!-- Large symbol centered -->
+  <div style="position:absolute;top:50%;left:64px;transform:translateY(-55%);z-index:1;opacity:.9;">
+    <svg width="140" height="140" viewBox="0 0 240 240" fill="none">
+      <polygon points="48,170 88,44 110,44 110,170" fill="white"/>
+      <polygon points="130,44 152,44 192,170 130,170" fill="white"/>
+      <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+      <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+      <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+    </svg>
+  </div>
+
+  <div style="position:relative;z-index:1;">
+    <div class="cover-hl">Manual de<br><em>Marca</em></div>
+    <div class="cover-sub">NetCourt · Ranking para esportes de raquete · Guia oficial de identidade visual · 2025</div>
+  </div>
+</div>
+
+
+<!-- ══════ FILOSOFIA ══════ -->
+<section class="sec" id="filosofia">
+  <span class="eye">01 · Fundação</span>
+  <h2 class="h2">Filosofia da marca</h2>
+  <p class="lead">A NetCourt existe para transformar a organização de rankings de esportes de raquete em algo simples, moderno e engajante — para qualquer espaço, de clubes a condomínios.</p>
+
+  <div class="g3">
+    <div class="card"><div style="font-size:22px;margin-bottom:10px;">🎯</div>
+      <div style="font-size:13.5px;font-weight:700;margin-bottom:5px;">Propósito</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.65;">Automatizar o ranking para que organizadores foquem no que importa: o jogo.</div>
+    </div>
+    <div class="card"><div style="font-size:22px;margin-bottom:10px;">⚡</div>
+      <div style="font-size:13.5px;font-weight:700;margin-bottom:5px;">Promessa</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.65;">Sem planilha. Sem App Store. Sem grupo de WhatsApp bagunçado. Do zero ao ranking em 5 minutos.</div>
+    </div>
+    <div class="card"><div style="font-size:22px;margin-bottom:10px;">🏆</div>
+      <div style="font-size:13.5px;font-weight:700;margin-bottom:5px;">Personalidade</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.65;">Técnica como um árbitro. Engajante como uma competição. Acessível como o próprio esporte.</div>
+    </div>
+  </div>
+
+  <div class="nr mt40"></div>
+  <div class="g2 mt40">
+    <div>
+      <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:14px;">A marca é</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="font-size:14px;"><span class="check">✓</span>Moderna sem ser fria</div>
+        <div style="font-size:14px;"><span class="check">✓</span>Técnica sem ser intimidadora</div>
+        <div style="font-size:14px;"><span class="check">✓</span>Esportiva sem ser genérica</div>
+        <div style="font-size:14px;"><span class="check">✓</span>Digital com calor humano</div>
+        <div style="font-size:14px;"><span class="check">✓</span>Universal em esportes de raquete</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:14px;">A marca não é</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="font-size:14px;"><span class="cross">✕</span>Corporativa ou burocrática</div>
+        <div style="font-size:14px;"><span class="cross">✕</span>Informal ou descuidada</div>
+        <div style="font-size:14px;"><span class="cross">✕</span>Agressiva ou intimidadora</div>
+        <div style="font-size:14px;"><span class="cross">✕</span>Exclusiva de um só esporte</div>
+        <div style="font-size:14px;"><span class="cross">✕</span>Facilmente confundida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ SÍMBOLO ══════ -->
+<section class="sec sec-dark" id="simbolo">
+  <span class="eye eye-net">02 · Símbolo</span>
+  <h2 class="h2 h2-lt">Anatomia do símbolo</h2>
+  <p class="lead lead-lt">Dois lados da quadra separados pela rede. <strong>A linha azul é o net.</strong> Só faz sentido quando explicado — como toda boa marca.</p>
+
+  <!-- Main large symbol -->
+  <div style="display:flex;gap:64px;align-items:center;margin-bottom:52px;">
+    <div style="flex-shrink:0;">
+      <svg width="200" height="200" viewBox="0 0 240 240" fill="none">
+        <rect width="240" height="240" rx="48" fill="rgba(255,255,255,.05)"/>
+        <polygon points="48,170 88,44 110,44 110,170" fill="#FFFFFF"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="#FFFFFF"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+      </svg>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:18px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">⬜</div>
+        <div>
+          <div style="font-size:13.5px;font-weight:700;color:white;margin-bottom:3px;">Duas metades da quadra em perspectiva</div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,.48);line-height:1.6;">Os dois trapézios representam as metades da quadra vistas em perspectiva. A assimetria controlada transmite dinâmica e movimento. Funciona para tênis, padel, beach tênis e pickleball sem adaptação.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:34px;height:34px;border-radius:8px;background:rgba(56,189,248,.12);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">➖</div>
+        <div>
+          <div style="font-size:13.5px;font-weight:700;color:#38BDF8;margin-bottom:3px;">A rede — elemento central e único colorido</div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,.48);line-height:1.6;">A linha <mono-dk>#38BDF8</mono-dk> é a rede que divide e conecta. É o único elemento colorido do símbolo. Ao remover a cor, o símbolo perde sua identidade.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:34px;height:34px;border-radius:8px;background:rgba(30,41,59,.6);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🔲</div>
+        <div>
+          <div style="font-size:13.5px;font-weight:700;color:white;margin-bottom:3px;">Bevel lateral — profundidade e precisão</div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,.48);line-height:1.6;">Cada pilar tem uma faixa <mono-dk>#1E293B</mono-dk> na borda interna, criando profundidade tridimensional. Detalhe que distingue o símbolo de formas genéricas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Anatomy breakdown -->
+  <div class="g3">
+    <div class="card-dk" style="text-align:center;padding:28px 20px;">
+      <svg width="72" height="72" viewBox="0 0 240 240" fill="none" style="margin-bottom:12px;">
+        <polygon points="48,170 88,44 110,44 110,170" fill="white" opacity=".9"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="white" opacity=".08"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8" opacity=".08"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B" opacity=".9"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B" opacity=".08"/>
+      </svg>
+      <div style="font-size:12px;font-weight:700;color:white;margin-bottom:2px;">Lado esquerdo</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.38);">Pilar + bevel <mono-dk>#1E293B</mono-dk></div>
+    </div>
+    <div class="card-dk" style="text-align:center;padding:28px 20px;">
+      <svg width="72" height="72" viewBox="0 0 240 240" fill="none" style="margin-bottom:12px;">
+        <polygon points="48,170 88,44 110,44 110,170" fill="white" opacity=".08"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="white" opacity=".08"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B" opacity=".08"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B" opacity=".08"/>
+      </svg>
+      <div style="font-size:12px;font-weight:700;color:#38BDF8;margin-bottom:2px;">Linha da rede</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.38);">Único elemento colorido · <mono-dk>#38BDF8</mono-dk></div>
+    </div>
+    <div class="card-dk" style="text-align:center;padding:28px 20px;">
+      <svg width="72" height="72" viewBox="0 0 240 240" fill="none" style="margin-bottom:12px;">
+        <polygon points="48,170 88,44 110,44 110,170" fill="white" opacity=".08"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="white" opacity=".9"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8" opacity=".08"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B" opacity=".08"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B" opacity=".9"/>
+      </svg>
+      <div style="font-size:12px;font-weight:700;color:white;margin-bottom:2px;">Lado direito</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.38);">Pilar + bevel <mono-dk>#1E293B</mono-dk></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ LOGOTIPO ══════ -->
+<section class="sec" id="logotipo">
+  <span class="eye">03 · Logotipo completo</span>
+  <h2 class="h2">Wordmark</h2>
+  <p class="lead">O logotipo combina símbolo + wordmark <strong>"net court"</strong> em Inter 900 (Black). "net" em branco, "court" em <strong>#38BDF8</strong>. O subtítulo "RANKING DE TÊNIS" usa Inter 300 em <strong>#475569</strong>.</p>
+
+  <!-- Primary full logo -->
+  <div style="background:var(--night);border-radius:16px;padding:56px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <svg width="56" height="56" viewBox="0 0 240 240" fill="none">
+        <polygon points="48,170 88,44 110,44 110,170" fill="#FFFFFF"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="#FFFFFF"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+      </svg>
+      <div class="wm">
+        <div class="wm-row" style="gap:0;">
+          <span class="wm-net" style="font-size:44px;">net</span>
+          <span class="wm-court" style="font-size:44px;margin-left:10px;">court</span>
+        </div>
+        <span class="wm-tag" style="font-size:12px;">RANKING DE TÊNIS</span>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:var(--light);text-align:center;margin-bottom:40px;">Logotipo principal · fundo court night</div>
+
+  <!-- Symbol only + Wordmark only -->
+  <div class="g2">
+    <div style="background:var(--slate);border-radius:12px;padding:36px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+      <svg width="64" height="64" viewBox="0 0 240 240" fill="none">
+        <rect width="240" height="240" rx="48" fill="rgba(255,255,255,.06)"/>
+        <polygon points="48,170 88,44 110,44 110,170" fill="#FFFFFF"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="#FFFFFF"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+      </svg>
+      <div style="font-size:10.5px;color:rgba(255,255,255,.28);font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Símbolo isolado</div>
+    </div>
+    <div style="background:var(--night);border-radius:12px;padding:36px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+      <div class="wm-row" style="gap:0;">
+        <span class="wm-net" style="font-size:36px;">net</span>
+        <span class="wm-court" style="font-size:36px;margin-left:8px;">court</span>
+      </div>
+      <div style="font-size:10.5px;color:rgba(255,255,255,.28);font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Wordmark sem símbolo</div>
+    </div>
+  </div>
+
+  <div class="card-net mt20">
+    <div style="font-size:12.5px;font-weight:700;color:var(--blue);margin-bottom:5px;">📐 Regra de construção</div>
+    <div style="font-size:13px;color:var(--slate);line-height:1.65;">O símbolo e o wordmark sempre aparecem alinhados verticalmente ao centro. O espaço entre símbolo e texto é igual à largura do próprio símbolo. Nunca inserir outros elementos entre eles.</div>
+  </div>
+</section>
+
+
+<!-- ══════ VARIANTES ══════ -->
+<section class="sec sec-base" id="variantes">
+  <span class="eye">04 · Variantes do logo</span>
+  <h2 class="h2">Quatro variantes oficiais</h2>
+  <p class="lead">Cada variante tem comportamento específico de cor. Nunca criar combinações fora destas quatro.</p>
+
+  <div class="g2" style="gap:16px;">
+    <!-- DARK -->
+    <div>
+      <div class="lbox lbox-dark" style="margin-bottom:8px;padding:40px;">
+        <div style="display:flex;align-items:center;gap:13px;">
+          <svg width="44" height="44" viewBox="0 0 240 240" fill="none">
+            <polygon points="48,170 88,44 110,44 110,170" fill="#FFFFFF"/>
+            <polygon points="130,44 152,44 192,170 130,170" fill="#FFFFFF"/>
+            <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+            <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+            <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+          </svg>
+          <div class="wm"><div class="wm-row"><span class="wm-net" style="font-size:24px;">net</span><span class="wm-court" style="font-size:24px;margin-left:6px;">court</span></div><span class="wm-tag" style="font-size:7px;">RANKING DE TÊNIS</span></div>
+        </div>
+        <label>dark · uso principal</label>
+      </div>
+      <div class="card" style="font-size:12px;color:var(--muted);line-height:1.6;"><strong style="color:var(--night);">Fundo:</strong> #0C1220 · <strong style="color:var(--night);">Pilares:</strong> #FFFFFF · <strong style="color:var(--night);">Bevel:</strong> #1E293B · <strong style="color:var(--night);">Rede:</strong> #38BDF8</div>
+    </div>
+
+    <!-- SLATE -->
+    <div>
+      <div class="lbox lbox-slate" style="margin-bottom:8px;padding:40px;">
+        <div style="display:flex;align-items:center;gap:13px;">
+          <svg width="44" height="44" viewBox="0 0 240 240" fill="none">
+            <polygon points="48,170 88,44 110,44 110,170" fill="#FFFFFF"/>
+            <polygon points="130,44 152,44 192,170 130,170" fill="#FFFFFF"/>
+            <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+            <polygon points="48,170 88,44 98,44 58,170" fill="rgba(0,0,0,.25)"/>
+            <polygon points="142,44 152,44 192,170 182,170" fill="rgba(0,0,0,.25)"/>
+          </svg>
+          <div class="wm"><div class="wm-row"><span class="wm-net" style="font-size:24px;">net</span><span class="wm-court" style="font-size:24px;margin-left:6px;">court</span></div><span class="wm-tag" style="font-size:7px;">RANKING DE TÊNIS</span></div>
+        </div>
+        <label>slate · cards e sidebar</label>
+      </div>
+      <div class="card" style="font-size:12px;color:var(--muted);line-height:1.6;"><strong style="color:var(--night);">Fundo:</strong> #1E293B · <strong style="color:var(--night);">Pilares:</strong> #FFFFFF · <strong style="color:var(--night);">Bevel:</strong> rgba(0,0,0,.25) · <strong style="color:var(--night);">Rede:</strong> #38BDF8</div>
+    </div>
+
+    <!-- AZUL -->
+    <div>
+      <div class="lbox lbox-blue" style="margin-bottom:8px;padding:40px;">
+        <div style="display:flex;align-items:center;gap:13px;">
+          <svg width="44" height="44" viewBox="0 0 240 240" fill="none">
+            <polygon points="48,170 88,44 110,44 110,170" fill="#FFFFFF"/>
+            <polygon points="130,44 152,44 192,170 130,170" fill="#FFFFFF"/>
+            <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#FFFFFF"/>
+            <polygon points="48,170 88,44 98,44 58,170" fill="rgba(0,0,0,.2)"/>
+            <polygon points="142,44 152,44 192,170 182,170" fill="rgba(0,0,0,.2)"/>
+          </svg>
+          <div class="wm wm-wh"><div class="wm-row"><span class="wm-net" style="font-size:24px;">net</span><span style="font-family:Inter,sans-serif;font-weight:900;font-size:24px;color:white;margin-left:6px;">court</span></div><span class="wm-tag" style="font-size:7px;color:rgba(255,255,255,.5);">RANKING DE TÊNIS</span></div>
+        </div>
+        <label>azul · CTAs e destaques</label>
+      </div>
+      <div class="card" style="font-size:12px;color:var(--muted);line-height:1.6;"><strong style="color:var(--night);">Fundo:</strong> #0369A1 · <strong style="color:var(--night);">Pilares:</strong> #FFFFFF · <strong style="color:var(--night);">Rede:</strong> #FFFFFF (não azul!)</div>
+    </div>
+
+    <!-- CLARO -->
+    <div>
+      <div class="lbox lbox-light" style="margin-bottom:8px;padding:40px;">
+        <div style="display:flex;align-items:center;gap:13px;">
+          <svg width="44" height="44" viewBox="0 0 240 240" fill="none">
+            <rect width="240" height="240" rx="48" fill="#F1F5F9" stroke="#E2E8F0"/>
+            <polygon points="48,170 88,44 110,44 110,170" fill="#0C1220"/>
+            <polygon points="130,44 152,44 192,170 130,170" fill="#0C1220"/>
+            <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#0369A1"/>
+          </svg>
+          <div class="wm wm-lt"><div class="wm-row"><span class="wm-net" style="font-size:24px;color:#0C1220;">net</span><span style="font-family:Inter,sans-serif;font-weight:900;font-size:24px;color:#0369A1;margin-left:6px;">court</span></div><span style="font-family:Inter,sans-serif;font-weight:300;font-size:7px;letter-spacing:.14em;text-transform:uppercase;color:#94A3B8;">RANKING DE TÊNIS</span></div>
+        </div>
+        <label>claro · fundo branco · documentos</label>
+      </div>
+      <div class="card" style="font-size:12px;color:var(--muted);line-height:1.6;"><strong style="color:var(--night);">Fundo:</strong> #F1F5F9 + borda #E2E8F0 · <strong style="color:var(--night);">Pilares:</strong> #0C1220 · <strong style="color:var(--night);">Rede:</strong> #0369A1</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ ESCALA ══════ -->
+<section class="sec sec-dark" id="escala">
+  <span class="eye eye-net">05 · Escala & Espaço</span>
+  <h2 class="h2 h2-lt">Tamanhos e área de proteção</h2>
+  <p class="lead lead-lt">O símbolo foi construído pixel a pixel em cada escala. O raio do canto é sempre <strong>~22.5% do tamanho total</strong>.</p>
+
+  <!-- Size scale -->
+  <div style="display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;margin-bottom:48px;padding:36px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06);">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="80" height="80" viewBox="0 0 240 240" fill="none">
+        <rect width="240" height="240" rx="54" fill="#0C1220"/>
+        <polygon points="48,170 88,44 110,44 110,170" fill="white"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="white"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+      </svg>
+      <span style="font-size:10.5px;color:rgba(255,255,255,.35);font-weight:700;">80px · rx=18</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="60" height="60" viewBox="0 0 240 240" fill="none">
+        <rect width="240" height="240" rx="54" fill="#0C1220"/>
+        <polygon points="48,170 88,44 110,44 110,170" fill="white"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="white"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+      </svg>
+      <span style="font-size:10.5px;color:rgba(255,255,255,.35);font-weight:700;">60px · rx=14</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="44" height="44" viewBox="0 0 240 240" fill="none">
+        <rect width="240" height="240" rx="54" fill="#0C1220"/>
+        <polygon points="48,170 88,44 110,44 110,170" fill="white"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="white"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+      </svg>
+      <span style="font-size:10.5px;color:rgba(255,255,255,.35);font-weight:700;">44px · rx=10</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg width="32" height="32" viewBox="0 0 240 240" fill="none">
+        <rect width="240" height="240" rx="54" fill="#0C1220"/>
+        <polygon points="48,170 88,44 110,44 110,170" fill="white"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="white"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+      </svg>
+      <span style="font-size:10.5px;color:rgba(255,255,255,.35);font-weight:700;">32px · rx=8 · min</span>
+    </div>
+  </div>
+
+  <!-- Clear space -->
+  <div style="display:flex;justify-content:center;padding:48px 0;">
+    <div style="position:relative;display:inline-block;">
+      <div style="border:2px dashed rgba(56,189,248,.45);border-radius:6px;padding:40px;background:rgba(255,255,255,.03);display:inline-flex;align-items:center;gap:16px;">
+        <svg width="48" height="48" viewBox="0 0 240 240" fill="none">
+          <polygon points="48,170 88,44 110,44 110,170" fill="white"/>
+          <polygon points="130,44 152,44 192,170 130,170" fill="white"/>
+          <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+          <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+          <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+        </svg>
+        <div style="font-size:26px;font-weight:900;color:white;">net<span style="color:#38BDF8;">court</span></div>
+      </div>
+      <div style="position:absolute;top:50%;left:-140px;transform:translateY(-50%);display:flex;align-items:center;gap:6px;white-space:nowrap;">
+        <span style="font-size:11px;color:rgba(56,189,248,.7);">espaço mínimo</span>
+        <span style="display:block;width:56px;height:1px;background:rgba(56,189,248,.4);"></span>
+      </div>
+      <div style="position:absolute;top:4px;left:50%;transform:translateX(-50%);font-size:11px;color:rgba(56,189,248,.6);white-space:nowrap;">= altura da letra "n"</div>
+    </div>
+  </div>
+
+  <table class="tbl tbl-dk mt28">
+    <thead><tr><th>Contexto</th><th>Tamanho mínimo</th><th>Variante</th></tr></thead>
+    <tbody>
+      <tr><td>Web · navbar</td><td>28px símbolo + wordmark</td><td>dark ou slate</td></tr>
+      <tr><td>App icon (iOS/Android)</td><td>32px mínimo · ideal 1024px</td><td>dark (sem borda)</td></tr>
+      <tr><td>Favicon</td><td>16px · 32px · 48px</td><td>apenas símbolo</td></tr>
+      <tr><td>Instagram · foto de perfil</td><td>320×320px</td><td>dark com fundo #0C1220</td></tr>
+      <tr><td>Impresso · documento</td><td>30mm símbolo + wordmark</td><td>claro se fundo branco</td></tr>
+      <tr><td>Impresso · camiseta / bordado</td><td>20mm · apenas símbolo</td><td>dark ou monotone</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ══════ USOS PROIBIDOS ══════ -->
+<section class="sec" id="incorreto">
+  <span class="eye">06 · Proteção</span>
+  <h2 class="h2">O que nunca fazer</h2>
+  <p class="lead">Estas aplicações estão proibidas e comprometem a identidade da marca.</p>
+
+  <div class="dont-grid">
+    <div class="dont-card">
+      <div class="dont-pre" style="background:var(--night);">
+        <div style="display:flex;align-items:center;gap:10px;transform:scaleX(1.6);">
+          <svg width="32" height="32" viewBox="0 0 240 240" fill="none"><polygon points="48,170 88,44 110,44 110,170" fill="white"/><polygon points="130,44 152,44 192,170 130,170" fill="white"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/></svg>
+          <span style="font-size:18px;font-weight:900;color:white;">net<span style="color:#38BDF8;">court</span></span>
+        </div>
+      </div>
+      <div class="dont-cap"><div class="dont-no">✕ Proibido</div><p class="dont-desc">Nunca distorcer ou esticar o logo.</p></div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-pre" style="background:var(--night);">
+        <div style="display:flex;align-items:center;gap:10px;transform:rotate(-18deg);">
+          <svg width="32" height="32" viewBox="0 0 240 240" fill="none"><polygon points="48,170 88,44 110,44 110,170" fill="white"/><polygon points="130,44 152,44 192,170 130,170" fill="white"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/></svg>
+          <span style="font-size:18px;font-weight:900;color:white;">net<span style="color:#38BDF8;">court</span></span>
+        </div>
+      </div>
+      <div class="dont-cap"><div class="dont-no">✕ Proibido</div><p class="dont-desc">Nunca rotacionar o logo.</p></div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-pre" style="background:var(--night);">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="32" height="32" viewBox="0 0 240 240" fill="none"><polygon points="48,170 88,44 110,44 110,170" fill="#F59E0B"/><polygon points="130,44 152,44 192,170 130,170" fill="#F59E0B"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#DC2626"/></svg>
+          <span style="font-size:18px;font-weight:900;color:#F59E0B;">net<span style="color:#DC2626;">court</span></span>
+        </div>
+      </div>
+      <div class="dont-cap"><div class="dont-no">✕ Proibido</div><p class="dont-desc">Nunca alterar as cores do logo.</p></div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-pre" style="background:linear-gradient(135deg,#7C3AED,#EC4899);">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="32" height="32" viewBox="0 0 240 240" fill="none"><polygon points="48,170 88,44 110,44 110,170" fill="white"/><polygon points="130,44 152,44 192,170 130,170" fill="white"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/></svg>
+          <span style="font-size:18px;font-weight:900;color:white;">net<span style="color:#38BDF8;">court</span></span>
+        </div>
+      </div>
+      <div class="dont-cap"><div class="dont-no">✕ Proibido</div><p class="dont-desc">Nunca usar fundo fora da paleta oficial.</p></div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-pre" style="background:var(--night);">
+        <div style="display:flex;align-items:center;gap:10px;filter:drop-shadow(0 0 14px #38BDF8);">
+          <svg width="32" height="32" viewBox="0 0 240 240" fill="none"><polygon points="48,170 88,44 110,44 110,170" fill="white"/><polygon points="130,44 152,44 192,170 130,170" fill="white"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/></svg>
+          <span style="font-size:18px;font-weight:900;color:white;">net<span style="color:#38BDF8;">court</span></span>
+        </div>
+      </div>
+      <div class="dont-cap"><div class="dont-no">✕ Proibido</div><p class="dont-desc">Nunca adicionar brilho, sombra ou efeitos.</p></div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-pre" style="background:var(--night);">
+        <div style="display:flex;align-items:center;gap:10px;opacity:.2;">
+          <svg width="32" height="32" viewBox="0 0 240 240" fill="none"><polygon points="48,170 88,44 110,44 110,170" fill="white"/><polygon points="130,44 152,44 192,170 130,170" fill="white"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/></svg>
+          <span style="font-size:18px;font-weight:900;color:white;">net<span style="color:#38BDF8;">court</span></span>
+        </div>
+      </div>
+      <div class="dont-cap"><div class="dont-no">✕ Proibido</div><p class="dont-desc">Nunca usar com opacidade reduzida.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ CORES ══════ -->
+<section class="sec sec-base" id="cores">
+  <span class="eye">07 · Sistema visual</span>
+  <h2 class="h2">Paleta de cores</h2>
+  <p class="lead">Cinco cores. Cada uma com função específica. Extraídas diretamente do arquivo de identidade visual oficial.</p>
+
+  <div class="g5">
+    <div><div class="swatch-chip" style="background:#0C1220;"></div>
+      <div class="swatch-name">Court Night</div><div class="swatch-role">Background principal · texto</div>
+      <div class="swatch-hex">#0C1220</div></div>
+    <div><div class="swatch-chip" style="background:#1E293B;"></div>
+      <div class="swatch-name">Slate</div><div class="swatch-role">Cards · sidebar · bevel do símbolo</div>
+      <div class="swatch-hex">#1E293B</div></div>
+    <div><div class="swatch-chip" style="background:#0369A1;"></div>
+      <div class="swatch-name">Court Blue</div><div class="swatch-role">Botões · links · acento primário</div>
+      <div class="swatch-hex">#0369A1</div></div>
+    <div><div class="swatch-chip" style="background:#38BDF8;"></div>
+      <div class="swatch-name">Net Line</div><div class="swatch-role">Destaque · a rede no símbolo</div>
+      <div class="swatch-hex">#38BDF8</div></div>
+    <div><div class="swatch-chip" style="background:#F1F5F9;border-color:var(--border);"></div>
+      <div class="swatch-name">Baseline</div><div class="swatch-role">Background claro · documentos</div>
+      <div class="swatch-hex">#F1F5F9</div></div>
+  </div>
+
+  <div class="nr mt40"></div>
+  <table class="tbl mt40">
+    <thead><tr><th>Nome</th><th>HEX</th><th>RGB</th><th>HSL</th><th>Função principal</th></tr></thead>
+    <tbody>
+      <tr><td>Court Night</td><td><mono>#0C1220</mono></td><td>12 · 18 · 32</td><td>228° 45% 9%</td><td>Background e textos principais</td></tr>
+      <tr><td>Slate</td><td><mono>#1E293B</mono></td><td>30 · 41 · 59</td><td>215° 33% 17%</td><td>Cards, sidebar e bevel do símbolo</td></tr>
+      <tr><td>Court Blue</td><td><mono>#0369A1</mono></td><td>3 · 105 · 161</td><td>201° 96% 32%</td><td>Botões primários, links, ícones</td></tr>
+      <tr><td>Net Line</td><td><mono>#38BDF8</mono></td><td>56 · 189 · 248</td><td>199° 92% 60%</td><td>Acento, destaque, a rede no logo</td></tr>
+      <tr><td>Baseline</td><td><mono>#F1F5F9</mono></td><td>241 · 245 · 249</td><td>210° 40% 96%</td><td>Background claro, documentos</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Cor auxiliar -->
+  <div class="card-net mt28">
+    <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:5px;">🎨 Cor auxiliar de texto</div>
+    <div style="font-size:13px;color:var(--slate);line-height:1.65;">Para labels e metadados sobre fundo claro, usar <mono>#475569</mono> (subtítulo "RANKING DE TÊNIS" do wordmark) ou <mono>#64748B</mono> para textos secundários. Estas cores não pertencem à paleta principal mas são aprovadas como utilitários de texto.</div>
+  </div>
+</section>
+
+
+<!-- ══════ TIPOGRAFIA ══════ -->
+<section class="sec" id="tipografia">
+  <span class="eye">08 · Tipografia</span>
+  <h2 class="h2">Sistema tipográfico</h2>
+  <p class="lead">Inter como typeface principal — objetiva, técnica, alta legibilidade digital. Pesos usados: <strong>300 · 400 · 500 · 600 · 700 · 900.</strong> DM Serif Display para títulos de marketing.</p>
+
+  <div class="g2" style="margin-bottom:40px;">
+    <div class="card">
+      <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:14px;">Principal · Interface</div>
+      <div style="font-size:52px;font-weight:900;letter-spacing:-.02em;color:var(--night);line-height:1;margin-bottom:10px;">Inter</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:12px;">Pesos: 300 · 400 · 500 · 600 · 700 · <strong>900 (wordmark)</strong></div>
+      <div style="font-size:12px;color:var(--muted);">Google Fonts · Gratuito · Excelente em telas pequenas</div>
+    </div>
+    <div class="card">
+      <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:14px;">Display · Títulos institucionais</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:52px;color:var(--night);line-height:1;margin-bottom:10px;">DM Serif</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:12px;">Peso: 400 Regular (único)</div>
+      <div style="font-size:12px;color:var(--muted);">Landing pages, apresentações, manual de marca</div>
+    </div>
+  </div>
+
+  <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:18px;">Escala tipográfica · Interface digital</div>
+  <div>
+    <div class="type-row">
+      <div class="type-spec"><div class="ts-name">Display</div><div class="ts-detail">Inter 900 · 48–72px · ls -.02</div></div>
+      <div style="font-size:52px;font-weight:900;letter-spacing:-.02em;color:var(--night);line-height:1;">Seu ranking</div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><div class="ts-name">H1</div><div class="ts-detail">Inter 700 · 32px · ls -.015</div></div>
+      <div style="font-size:32px;font-weight:700;letter-spacing:-.015em;color:var(--night);">Classificação em tempo real</div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><div class="ts-name">H2</div><div class="ts-detail">Inter 600 · 22px</div></div>
+      <div style="font-size:22px;font-weight:600;color:var(--night);">Sorteio automático de confrontos</div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><div class="ts-name">Body</div><div class="ts-detail">Inter 400 · 15px · lh 1.65</div></div>
+      <div style="font-size:15px;color:var(--muted);line-height:1.65;">O NetCourt organiza o ranking do seu espaço automaticamente — do sorteio ao placar, tudo no celular. Sem planilha.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><div class="ts-name">Label</div><div class="ts-detail">Inter 700 · 10.5px · ls .18em</div></div>
+      <div style="font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);">Para o atleta</div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><div class="ts-name">Wordmark</div><div class="ts-detail">Inter 900 · 44px · ls -.02</div></div>
+      <div style="font-size:36px;font-weight:900;letter-spacing:-.02em;color:var(--night);">net<span style="color:var(--blue);">court</span></div>
+    </div>
+    <div class="type-row">
+      <div class="type-spec"><div class="ts-name">Subtítulo do logo</div><div class="ts-detail">Inter 300 · 12px · ls .14em</div></div>
+      <div style="font-size:13px;font-weight:300;letter-spacing:.14em;text-transform:uppercase;color:#475569;">RANKING DE TÊNIS</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ GRID ══════ -->
+<section class="sec sec-base" id="grid">
+  <span class="eye">09 · Grid & Espaçamento</span>
+  <h2 class="h2">Sistema de espaçamento</h2>
+  <p class="lead">Base 4px. Todos os espaçamentos são múltiplos de 4 — de 4px a 80px.</p>
+
+  <div style="display:flex;align-items:flex-end;gap:0;margin-bottom:32px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);opacity:.7;border-radius:4px;width:4px;height:4px;"></div>
+      <div style="font-size:10px;color:var(--muted);">4</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);opacity:.7;border-radius:4px;width:8px;height:8px;"></div>
+      <div style="font-size:10px;color:var(--muted);">8</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);opacity:.7;border-radius:4px;width:12px;height:12px;"></div>
+      <div style="font-size:10px;color:var(--muted);">12</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);opacity:.7;border-radius:4px;width:16px;height:16px;"></div>
+      <div style="font-size:10px;color:var(--muted);">16</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);opacity:.8;border-radius:4px;width:20px;height:20px;"></div>
+      <div style="font-size:10px;color:var(--muted);">20</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);opacity:.8;border-radius:4px;width:24px;height:24px;"></div>
+      <div style="font-size:10px;color:var(--muted);">24</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);opacity:.85;border-radius:4px;width:32px;height:32px;"></div>
+      <div style="font-size:10px;color:var(--muted);">32</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);opacity:.9;border-radius:4px;width:40px;height:40px;"></div>
+      <div style="font-size:10px;color:var(--muted);">40</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);border-radius:4px;width:48px;height:48px;"></div>
+      <div style="font-size:10px;color:var(--muted);">48</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);border-radius:4px;width:64px;height:64px;"></div>
+      <div style="font-size:10px;color:var(--muted);">64</div>
+    </div>
+    <div style="width:8px;"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="background:var(--net);border-radius:4px;width:80px;height:80px;"></div>
+      <div style="font-size:10px;color:var(--muted);">80</div>
+    </div>
+  </div>
+
+  <table class="tbl">
+    <thead><tr><th>Token</th><th>Valor</th><th>Uso típico</th></tr></thead>
+    <tbody>
+      <tr><td>xs</td><td>4px</td><td>Gap entre ícone e label, separadores finos</td></tr>
+      <tr><td>sm</td><td>8px</td><td>Padding interno de chips e tags</td></tr>
+      <tr><td>md</td><td>16px</td><td>Gap entre elementos de formulário</td></tr>
+      <tr><td>lg</td><td>24px</td><td>Padding de cards, gap entre cards</td></tr>
+      <tr><td>xl</td><td>40px</td><td>Padding de seções, gap entre grupos</td></tr>
+      <tr><td>2xl</td><td>64px</td><td>Padding de telas, margens principais</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ══════ DIGITAL ══════ -->
+<section class="sec" id="digital">
+  <span class="eye">10 · Aplicações</span>
+  <h2 class="h2">Aplicações digitais</h2>
+  <p class="lead">O logo em seus contextos mais frequentes de uso digital.</p>
+
+  <!-- Navbar mockup -->
+  <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:14px;">Barra de navegação</div>
+  <div style="background:rgba(8,14,26,.95);border-radius:10px;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;border:1px solid rgba(255,255,255,.05);">
+    <div style="display:flex;align-items:center;gap:9px;">
+      <svg width="26" height="26" viewBox="0 0 240 240" fill="none">
+        <polygon points="48,170 88,44 110,44 110,170" fill="white"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="white"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+      </svg>
+      <span style="font-size:16px;font-weight:900;color:white;letter-spacing:-.01em;">net<span style="color:#38BDF8;">court</span></span>
+    </div>
+    <div style="display:flex;gap:22px;">
+      <span style="font-size:13px;color:rgba(255,255,255,.45);">Como funciona</span>
+      <span style="font-size:13px;color:rgba(255,255,255,.45);">Esportes</span>
+      <span style="font-size:13px;color:rgba(255,255,255,.45);">Planos</span>
+    </div>
+    <div style="background:linear-gradient(135deg,#0369A1,#38BDF8);padding:8px 18px;border-radius:8px;font-size:12.5px;font-weight:700;color:white;">Criar ranking grátis</div>
+  </div>
+
+  <!-- Button system -->
+  <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:14px;">Sistema de botões</div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:28px 32px;background:var(--night);border-radius:12px;margin-bottom:36px;">
+    <div style="background:linear-gradient(135deg,#0369A1,#38BDF8);padding:11px 26px;border-radius:9px;font-size:14px;font-weight:700;color:white;">Primário</div>
+    <div style="background:transparent;border:1.5px solid rgba(56,189,248,.4);padding:11px 26px;border-radius:9px;font-size:14px;font-weight:600;color:#38BDF8;">Secundário</div>
+    <div style="background:rgba(255,255,255,.05);padding:11px 26px;border-radius:9px;font-size:14px;font-weight:600;color:rgba(255,255,255,.65);">Ghost</div>
+    <div style="background:#0369A1;padding:11px 26px;border-radius:9px;font-size:14px;font-weight:700;color:white;">Court Blue</div>
+  </div>
+
+  <!-- App icon grid -->
+  <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:14px;">Ícone do app — escala completa</div>
+  <div style="background:var(--fafc);border:1px solid var(--border);border-radius:12px;padding:28px;display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <svg width="96" height="96" viewBox="0 0 240 240" fill="none"><rect width="240" height="240" rx="54" fill="#0C1220"/><polygon points="48,170 88,44 110,44 110,170" fill="white"/><polygon points="130,44 152,44 192,170 130,170" fill="white"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/><polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/><polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/></svg>
+      <span style="font-size:10px;color:var(--muted);">96px</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <svg width="72" height="72" viewBox="0 0 240 240" fill="none"><rect width="240" height="240" rx="54" fill="#0C1220"/><polygon points="48,170 88,44 110,44 110,170" fill="white"/><polygon points="130,44 152,44 192,170 130,170" fill="white"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/><polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/><polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/></svg>
+      <span style="font-size:10px;color:var(--muted);">72px</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <svg width="48" height="48" viewBox="0 0 240 240" fill="none"><rect width="240" height="240" rx="54" fill="#0C1220"/><polygon points="48,170 88,44 110,44 110,170" fill="white"/><polygon points="130,44 152,44 192,170 130,170" fill="white"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/><polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/><polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/></svg>
+      <span style="font-size:10px;color:var(--muted);">48px</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <svg width="32" height="32" viewBox="0 0 240 240" fill="none"><rect width="240" height="240" rx="54" fill="#0C1220"/><polygon points="48,170 88,44 110,44 110,170" fill="white"/><polygon points="130,44 152,44 192,170 130,170" fill="white"/><rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/><polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/><polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/></svg>
+      <span style="font-size:10px;color:var(--muted);">32px · min</span></div>
+  </div>
+</section>
+
+
+<!-- ══════ SOCIAL ══════ -->
+<section class="sec sec-dark" id="social">
+  <span class="eye eye-lt">11 · Redes sociais</span>
+  <h2 class="h2 h2-lt">Perfil Instagram</h2>
+  <p class="lead lead-lt">Especificações para <strong>@netcourt_ranking</strong>.</p>
+
+  <div class="g2">
+    <div class="card-dk">
+      <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;">Preview do perfil</div>
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:18px;">
+        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);padding:2.5px;flex-shrink:0;">
+          <div style="width:100%;height:100%;border-radius:50%;background:var(--night);display:flex;align-items:center;justify-content:center;">
+            <svg width="42" height="42" viewBox="0 0 240 240" fill="none">
+              <polygon points="48,170 88,44 110,44 110,170" fill="white"/>
+              <polygon points="130,44 152,44 192,170 130,170" fill="white"/>
+              <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+              <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+              <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:white;margin-bottom:2px;">netcourt_ranking</div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,.4);">Criador de conteúdo</div>
+        </div>
+      </div>
+      <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px;">net court</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.55);line-height:1.7;">Ranking automático para esportes de raquete 🎾<br>Sem planilha. Sem App Store. Só jogo.<br>🔗 netcourt.com.br</div>
+    </div>
+    <div class="card-dk">
+      <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;">Especificações</div>
+      <table class="tbl tbl-dk">
+        <tbody>
+          <tr><td>Foto de perfil</td><td>320×320px · símbolo centralizado · bg #0C1220</td></tr>
+          <tr><td>Nome exibido</td><td>net court (minúsculas, com espaço)</td></tr>
+          <tr><td>Username</td><td>@netcourt_ranking</td></tr>
+          <tr><td>Bio L1</td><td>Ranking automático para esportes de raquete 🎾</td></tr>
+          <tr><td>Bio L2</td><td>Sem planilha. Sem App Store. Só jogo.</td></tr>
+          <tr><td>Link</td><td>netcourt.com.br</td></tr>
+          <tr><td>Posts feed</td><td>1080×1080px</td></tr>
+          <tr><td>Stories / Reels</td><td>1080×1920px</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════ MOTION ══════ -->
+<section class="sec sec-slate" id="motion">
+  <span class="eye eye-lt">12 · Motion</span>
+  <h2 class="h2 h2-lt">Princípios de animação</h2>
+  <p class="lead lead-lt">Movimento reforça a precisão do produto. <strong>Nunca chama atenção para si mesmo</strong> — exceto nos momentos de celebração (vitória, conquista).</p>
+
+  <table class="tbl tbl-dk">
+    <thead><tr><th>Elemento</th><th>Duração</th><th>Easing</th><th>Descrição</th></tr></thead>
+    <tbody>
+      <tr><td>Hover de botão</td><td>150ms</td><td>ease-out</td><td>translateY(-2px) · shadow intensifica</td></tr>
+      <tr><td>Modal abrir</td><td>220ms</td><td>ease-out</td><td>opacity 0→1 + scale .96→1</td></tr>
+      <tr><td>Modal fechar</td><td>180ms</td><td>ease-in</td><td>opacity 1→0 + scale 1→.96</td></tr>
+      <tr><td>Toast / notificação</td><td>300ms</td><td>ease-out</td><td>slide down + fade in</td></tr>
+      <tr><td>Contadores numéricos</td><td>1400ms</td><td>cubic ease-out</td><td>count up até valor final</td></tr>
+      <tr><td>Ticker de atividade</td><td>30s</td><td>linear infinite</td><td>scroll horizontal contínuo</td></tr>
+      <tr><td>Animação de vitória</td><td>2–4s</td><td>spring</td><td>Celebração — pode ser exuberante</td></tr>
+      <tr><td>Fade de página</td><td>200ms</td><td>ease</td><td>opacity 0→1 no carregamento</td></tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- ══════ TOM DE VOZ ══════ -->
+<section class="sec" id="voz">
+  <span class="eye">13 · Comunicação</span>
+  <h2 class="h2">Tom de voz</h2>
+  <p class="lead">A NetCourt fala como um técnico experiente e um amigo que ama o esporte. <strong>Direto, sem enrolação, com entusiasmo genuíno.</strong></p>
+
+  <div class="g2">
+    <div class="voice-card">
+      <div class="voice-tag-y">✓ NetCourt fala assim</div>
+      <ul>
+        <li><span style="color:var(--blue);font-weight:700;">✓</span>Chega de planilha e WhatsApp bagunçado.</li>
+        <li><span style="color:var(--blue);font-weight:700;">✓</span>Seu ranking cuida do resto — você só joga.</li>
+        <li><span style="color:var(--blue);font-weight:700;">✓</span>Um link. O atleta já está dentro.</li>
+        <li><span style="color:var(--blue);font-weight:700;">✓</span>Vitória confirmada. Subiu 2 posições. 🔥</li>
+        <li><span style="color:var(--blue);font-weight:700;">✓</span>Configure em 5 minutos. Grátis para começar.</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <div class="voice-tag-n">✕ NetCourt não fala assim</div>
+      <ul>
+        <li><span style="color:#DC2626;font-weight:700;">✕</span>Nossa solução inovadora de gestão esportiva...</li>
+        <li><span style="color:#DC2626;font-weight:700;">✕</span>Mediante cadastro e validação de dados...</li>
+        <li><span style="color:#DC2626;font-weight:700;">✕</span>Potencialize resultados com nossa plataforma!</li>
+        <li><span style="color:#DC2626;font-weight:700;">✕</span>O mais completo sistema de ranking do mercado™</li>
+        <li><span style="color:#DC2626;font-weight:700;">✕</span>Clique aqui para saber mais sobre nossos planos.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="g3 mt20">
+    <div class="card"><div style="font-size:20px;margin-bottom:8px;">🎯</div><div style="font-size:13px;font-weight:700;margin-bottom:5px;">Direto</div><div style="font-size:12.5px;color:var(--muted);line-height:1.6;">Uma frase, um benefício. Sem jargão, sem rodeios.</div></div>
+    <div class="card"><div style="font-size:20px;margin-bottom:8px;">🤝</div><div style="font-size:13px;font-weight:700;margin-bottom:5px;">Próximo</div><div style="font-size:12.5px;color:var(--muted);line-height:1.6;">"Você" e "seu espaço", nunca "usuário" ou "cliente".</div></div>
+    <div class="card"><div style="font-size:20px;margin-bottom:8px;">⚡</div><div style="font-size:13px;font-weight:700;margin-bottom:5px;">Ativo</div><div style="font-size:12.5px;color:var(--muted);line-height:1.6;">Verbos no imperativo. "Crie", "Convide", "Jogue".</div></div>
+  </div>
+</section>
+
+
+<!-- ══════ COPY ══════ -->
+<section class="sec sec-dark" id="copy">
+  <span class="eye eye-lt">14 · Copy de referência</span>
+  <h2 class="h2 h2-lt">Headlines, CTAs e slogans</h2>
+  <p class="lead lead-lt">Biblioteca aprovada para uso em todos os canais.</p>
+
+  <div class="g2">
+    <div>
+      <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:14px;">Headlines</div>
+      <div class="copy-pill-dk">"Chega de app que ninguém instala, planilha e WhatsApp bagunçado."</div>
+      <div class="copy-pill-dk">"O ranking que seus atletas vão abrir todo dia."</div>
+      <div class="copy-pill-dk">"Seu espaço merece um ranking de verdade."</div>
+      <div class="copy-pill-dk">"Do zero ao ranking em 5 minutos."</div>
+    </div>
+    <div>
+      <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:14px;">CTAs e labels</div>
+      <div class="card-dk" style="margin-bottom:8px;"><span style="font-size:14px;color:#38BDF8;font-weight:700;">Criar meu ranking grátis →</span><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;">Botão primário do site</div></div>
+      <div class="card-dk" style="margin-bottom:8px;"><span style="font-size:14px;color:#38BDF8;font-weight:700;">Ver ranking de exemplo →</span><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;">CTA secundário</div></div>
+      <div class="card-dk" style="margin-bottom:8px;"><span style="font-size:14px;color:#38BDF8;font-weight:700;">Enviar interesse →</span><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;">Submit do formulário de lead</div></div>
+    </div>
+  </div>
+
+  <div class="nr mt40"></div>
+
+  <!-- Slogans -->
+  <div class="mt40">
+    <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:20px;">Slogans aprovados</div>
+    <div class="g3">
+      <div class="card-dk" style="text-align:center;padding:26px 20px;">
+        <div style="font-size:15px;font-weight:700;color:white;line-height:1.5;margin-bottom:8px;">"Sem planilha.<br>Sem App Store.<br>Só jogo."</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.3);">✓ Recomendado · Bio Instagram</div>
+      </div>
+      <div class="card-dk" style="text-align:center;padding:26px 20px;">
+        <div style="font-size:15px;font-weight:700;color:white;line-height:1.5;margin-bottom:8px;">"Onde o ranking<br>fica sério."</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.3);">Curto · Impactante · Alt</div>
+      </div>
+      <div class="card-dk" style="text-align:center;padding:26px 20px;">
+        <div style="font-size:15px;font-weight:700;color:white;line-height:1.5;margin-bottom:8px;">"Ranking automático<br>para esportes<br>de raquete."</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.3);">Descritivo · B2B · SEO</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tagline note -->
+  <div style="margin-top:40px;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.18);border-radius:10px;padding:18px 22px;">
+    <div style="font-size:12.5px;font-weight:700;color:#38BDF8;margin-bottom:5px;">💡 Nota sobre o subtítulo do logo</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.55);line-height:1.65;">O wordmark atual tem <strong style="color:rgba(255,255,255,.8);">"RANKING DE TÊNIS"</strong> como subtítulo. Com a expansão para padel, beach tênis e pickleball, recomenda-se atualizar para <strong style="color:white;">"RANKING DE ESPORTES DE RAQUETE"</strong> nas versões digitais, ou simplesmente omitir o subtítulo onde o contexto já é claro.</div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:52px;padding-top:28px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;">
+    <div style="display:flex;align-items:center;gap:9px;">
+      <svg width="24" height="24" viewBox="0 0 240 240" fill="none">
+        <polygon points="48,170 88,44 110,44 110,170" fill="white"/>
+        <polygon points="130,44 152,44 192,170 130,170" fill="white"/>
+        <rect x="38" y="106" width="164" height="5" rx="2.5" fill="#38BDF8"/>
+        <polygon points="48,170 88,44 98,44 58,170" fill="#1E293B"/>
+        <polygon points="142,44 152,44 192,170 182,170" fill="#1E293B"/>
+      </svg>
+      <span style="font-size:14px;font-weight:900;color:white;">net<span style="color:#38BDF8;">court</span></span>
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,.22);">Manual de Marca v2.0 · 2025 · netcourt.com.br</div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+const links = document.querySelectorAll('aside a');
+const secs  = document.querySelectorAll('[id]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('on'));
+      const a = document.querySelector(`aside a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('on');
+    }
+  });
+}, { threshold: .25 });
+secs.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
